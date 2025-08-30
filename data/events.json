@@ -1,0 +1,69 @@
+[
+    {
+        "id": "tech-talk-2025",
+        "title": "Tech Talk 2025",
+        "date": "June 5, 2025",
+        "description": "An insightful tech session organized by Vista Club covering AI, ML, and research.",
+        "cover": "images/img1.jpg",
+        "images": [
+            "images/tech1.jpg",
+            "images/tech2.jpg",
+            "images/tech3.jpg"
+        ]
+    },
+    {
+        "id": "coding-contest",
+        "title": "Coding Contest",
+        "date": "May 28, 2025",
+        "description": "Competitive coding event held in the department with over 100 participants.",
+        "cover": "images/img4.jpg",
+        "images": [
+            "images/coding1.jpg",
+            "images/coding2.jpg"
+        ]
+    },
+    {
+        "id": "hackathon-winners",
+        "title": "Hackathon Winners",
+        "date": "April 20, 2025",
+        "description": "Our department team secured 1st place in the national-level hackathon.",
+        "cover": "images/img6.jpg",
+        "images": [
+            "images/hack1.jpg",
+            "images/hack2.jpg",
+            "images/hack3.jpg"
+        ]
+    },
+    {
+        "id": "104",
+        "title": "Hackathon",
+        "date": "June 13, 2024",
+        "description": "hello how r u",
+        "cover": "images/104_cover_ashwini.jpg",
+        "images": [
+            "images/104_ashwitha.jpg"
+        ]
+    },
+    {
+        "id": "106",
+        "title": "HT",
+        "date": "August 5, 2024",
+        "description": "tr",
+        "cover": "images/default_cover.jpg",
+        "images": []
+    },
+    {
+        "title": "hiiiii",
+        "description": "er",
+        "date": "34",
+        "images": ""
+    },
+    {
+        "title": "heee",
+        "description": "rh",
+        "date": "34",
+        "images": [
+            "images/104_ashwitha.jpg"
+        ]
+    }
+]

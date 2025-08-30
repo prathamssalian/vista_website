@@ -1,0 +1,1012 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+    <title>VISTA | ISE Department Club</title>
+
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/vista.png') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Montserrat&display=swap" rel="stylesheet">
+    
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      
+      }
+
+      body {
+        font-family: 'Orbitron', sans-serif;
+        background-color: #0d1117;
+        color: #e6edf3;
+      }
+
+      nav {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 40px;
+        background: rgba(0, 0, 0, 0.3); /* Semi-transparent */
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border: 1px solid rgba(0, 255, 204, 0.2);
+        border-radius: 25px;
+        padding: 5px 30px;
+        margin: 0 auto;
+        width: fit-content;
+        font-family: 'Orbitron', sans-serif;
+        box-shadow: 0 8px 32px rgba(0, 255, 204, 0.1);
+        position: sticky;
+        top: 20px;
+        z-index: 1000;
+      }
+
+      nav a, .dropbtn {
+        color: #00ffcc;
+        text-decoration: none;
+        font-size: 1rem;
+        padding: 10px 15px;
+        border-radius: 10px;
+        transition: all 0.3s ease;
+        background: transparent;
+        border: none;
+        font-family: 'Orbitron', sans-serif;
+        cursor: pointer;
+      }
+
+      nav a:hover, .dropbtn:hover {
+        background-color: rgba(0, 255, 204, 0.1);
+        color: white;
+      }
+
+      .dropdown {
+        position: relative;
+      }
+
+      .dropdown-content {
+        display: none;
+        position: absolute;
+        top: 40px;
+        left: 0;
+        background: rgba(10, 10, 10, 0.7);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        min-width: 200px;
+        border-radius: 15px;
+        border: 1px solid rgba(0, 255, 204, 0.2);
+        box-shadow: 0 4px 20px rgba(0, 255, 204, 0.1);
+        z-index: 999;
+      }
+
+      .dropdown-content a {
+        display: block;
+        padding: 12px 18px;
+        color: #00ffcc;
+        text-decoration: none;
+        font-size: 0.95rem;
+        transition: background 0.3s;
+      }
+
+      .dropdown-content a:hover {
+        background-color: rgba(0, 255, 204, 0.1);
+        color: white;
+      }
+
+      .dropdown:hover .dropdown-content {
+        display: block;
+      }
+
+      .banner {
+        position: relative;
+        height: 300px;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #000;
+      }
+
+      .bg-video {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        min-width: 100%;
+        min-height: 100%;
+        width: auto;
+        height: auto;
+        z-index: 0;
+        transform: translate(-50%, -50%);
+        object-fit: cover;
+        filter: brightness(0.4) contrast(1.2);
+      }
+
+      .banner-content {
+        position: relative;
+        z-index: 1;
+        text-align: center;
+      }
+
+      .cyber-text {
+        font-family: 'Orbitron', monospace;
+        font-size: 2.3rem;
+        color: #00ffcc;
+        text-shadow: 0 0 8px #00ffcc, 0 0 16px #00ffcc;
+        white-space: nowrap;
+        overflow: hidden;
+        border-right: 3px solid #00ffcc;
+        width: 0;
+        animation: typing 4s steps(40) forwards, blink 0.5s step-end infinite;
+      }
+
+      @keyframes typing {
+        from { width: 0; }
+        to { width: 37ch; }
+      }
+
+      @keyframes blink {
+        50% { border-color: transparent; }
+      }
+
+      .section {
+        padding: 60px 20px;
+        text-align: center;
+        max-width: 1000px;
+        margin: auto;
+      }
+
+      .section h2 {
+        color: #38bdf8;
+        font-size: 2rem;
+        margin-bottom: 20px;
+        text-shadow: 0 0 6px #38bdf8;
+      }
+
+      .section p {
+        font-size: 1rem;
+        color: #cbd5e1;
+        line-height: 1.6;
+      }
+
+      .events {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 25px;
+        margin-top: 30px;
+      }
+
+      .event-card {
+        background: #1e293b;
+        border: 1px solid #334155;
+        border-radius: 15px;
+        padding: 20px;
+        width: 280px;
+        color: #f1f5f9;
+        transition: transform 0.3s, box-shadow 0.3s;
+      }
+
+      .event-card:hover {
+        transform: scale(1.05);
+        box-shadow: 0 0 15px #3b82f6;
+      }
+
+      .event-card h3 {
+        color: #00ffee;
+        font-family: 'Orbitron', monospace;
+        margin-bottom: 10px;
+        font-family: 'Orbitron', sans-serif;
+      }
+
+      .event-card p {
+        font-size: 0.95rem;
+        color: #e2e8f0;
+      }
+
+      footer {
+        background-color: #0f172a;
+        color: #64748b;
+        text-align: center;
+        padding: 20px 0;
+        font-size: 0.9rem;
+        margin-top: 40px;
+        border-top: 1px solid #334155;
+        font-family: 'Orbitron', monospace;
+      }
+
+      @media (max-width: 768px) {
+        .banner {
+          font-size: 2rem;
+          padding: 0 10px;
+          text-align: center;
+        }
+
+        .event-card {
+          width: 90%;
+        }
+      }
+
+      .toast {
+        visibility: hidden;
+        min-width: 250px;
+        background-color: #4CAF50;
+        color: white;
+        text-align: center;
+        padding: 12px;
+        position: fixed;
+        z-index: 999;
+        top: 50px;
+        left: 50%;
+        transform: translateX(-50%);
+        border-radius: 8px;
+      }
+
+      .toast.show {
+        visibility: visible;
+        animation: fadein 0.5s, fadeout 0.5s 2.5s;
+      }
+
+      @keyframes fadein {
+        from {top: 0px; opacity: 0;}
+        to {top: 50px; opacity: 1;}
+      }
+
+      @keyframes fadeout {
+        from {top: 50px; opacity: 1;}
+        to {top: 0px; opacity: 0;}
+      }
+
+      #contact {
+        color: #f9f9f9;
+        padding: 50px 20px;
+      }
+
+      #contact h2 {
+        text-align: center;
+        font-size: 32px;
+        margin-bottom: 25px;
+        font-family: 'Orbitron', monospace;
+      }
+
+      #contact form {
+        max-width: 500px;
+        margin: 0 auto;
+        background: rgba(255, 255, 255, 0.05);
+        padding: 25px;
+        border-radius: 12px;
+        box-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
+      }
+
+      #contact label {
+        display: block;
+        margin-bottom: 6px;
+        font-weight: 600;
+        color: #e0e0e0;
+        font-family: 'Orbitron', sans-serif;
+        color: #00ffcc;
+      }
+
+      #contact input, #contact textarea {
+        width: 100%;
+        padding: 10px 12px;
+        margin-bottom: 15px;
+        border: 1px solid #333;
+        border-radius: 8px;
+        background-color: #2c2c2c;
+        color: #ffffff;
+        font-size: 16px;
+        outline: none;
+        transition: border-color 0.3s ease;
+      }
+
+      #contact input:focus, #contact textarea:focus {
+        border-color: #3b82f6;
+      }
+
+      #contact button {
+        background-color: #3b82f6;
+        color: white;
+        padding: 12px 20px;
+        border: none;
+        border-radius: 8px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        font-family: 'Orbitron', monospace;
+      }
+
+      #contact button:hover {
+        background-color: #2563eb;
+      }
+
+      #contact p {
+        margin-top: 40px;
+        font-size: 16px;
+        text-align: center;
+        font-family: 'Orbitron', sans-serif;
+        color: #00ffcc;
+      }
+
+      #contact a {
+        color: #60a5fa;
+        text-decoration: none;
+      }
+
+      #contact a:hover {
+        color: #93c5fd;
+      }
+
+      #branch-fund {
+        padding: 60px 20px;
+        background-color: #0d1117;
+        font-family: 'Orbitron', sans-serif;
+        color: #fff;
+        text-align: center;
+      }
+
+      #branch-fund h2 {
+        font-size: 2.5rem;
+        color: #00ffff;
+        text-shadow: 0 0 8px #00ffff;
+        margin-bottom: 20px;
+      }
+
+      #branch-fund p {
+        font-size: 1.1rem;
+        color: #ccc;
+        max-width: 700px;
+        margin: auto;
+      }
+
+      #branch-fund button {
+        margin-top: 30px;
+        font-family: 'Orbitron', sans-serif;
+        padding: 12px 28px;
+        font-size: 1.1rem;
+        background: #00ffff;
+        color: #000;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        box-shadow: 0 0 15px #00ffff;
+      }
+
+      #branch-fund h3 {
+        margin-top: 50px;
+        color: #00ffcc;
+      }
+
+      .benefits-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 30px;
+        justify-content: center;
+        margin-top: 30px;
+      }
+
+      .benefit-card {
+        background: rgba(0, 255, 204, 0.08);
+        border: 1px solid #00ffff33;
+        border-radius: 16px;
+        padding: 20px;
+        width: 260px;
+        backdrop-filter: blur(10px);
+        box-shadow: 0 0 10px #00ffff55;
+        transition: transform 0.3s;
+      }
+
+      .benefit-card:hover {
+        transform: scale(1.05);
+      }
+
+      .benefit-card h4 {
+        color: #00ffff;
+        margin-bottom: 10px;
+      }
+
+      .benefit-card p {
+        color: #ccc;
+        font-size: 0.95rem;
+      }
+
+      .payment-popup {
+         position: fixed;
+         top: 0; left: 0;
+         width: 100%;
+         height: 100%;
+         display: none;
+         justify-content: center;
+         align-items: center;
+         background: rgba(0,0,0,0.9);
+         z-index: 9999;
+             max-height: 110vh; /* Let it expand with content */
+    overflow-y: auto;
+         backdrop-filter: blur(10px);
+      }
+
+      .popup-content {
+         background: rgba(255, 255, 255, 0.05);
+         border: 1px solid rgba(255, 255, 255, 0.15);
+         padding: 30px;
+         border-radius: 20px;
+         max-width: 400px;
+         width: 90%;
+         box-shadow: 0 0 20px #00ffff;
+         text-align: left;
+      }
+
+      .popup-content h2 {
+         color: #00ffff;
+         text-align: center;
+         margin-bottom: 20px;
+         text-shadow: 0 0 8px #00ffff;
+      }
+
+      .popup-content img {
+         display: block;
+         width: 180px;
+         height: 180px;
+         margin: 0 auto 20px;
+         border-radius: 12px;
+         box-shadow: 0 0 12px #00ffff;
+      }
+
+      .popup-content label {
+         display: block;
+         margin-top: 10px;
+         color: #f4ce14;
+      }
+
+      .popup-content input {
+         width: 100%;
+         padding: 8px;
+         border-radius: 6px;
+         border: none;
+         margin-top: 5px;
+         font-size: 1rem;
+         margin-bottom: 10px;
+      }
+
+      .popup-content button {
+         width: 100%;
+         margin-top: 15px;
+         padding: 10px;
+         background: #f4ce14;
+         border: none;
+         color: #000;
+         font-weight: bold;
+         border-radius: 8px;
+         cursor: pointer;
+         transition: 0.3s;
+      }
+
+      .popup-content button:hover {
+         background: #fff500;
+      }
+
+      .close-btn {
+         position: absolute;
+         top: 20px;
+         right: 30px;
+         font-size: 28px;
+         color: #f4ce14;
+         cursor: pointer;
+         text-shadow: 0 0 10px #f4ce14;
+      }
+
+      .close-btn:hover {
+         color: #fff;
+      }
+
+      .timeline-section {
+         padding: 60px 20px;
+         background: #0d0f1a;
+         color: #00ffee;
+         text-align: center;
+         position: relative;
+      }
+
+      .timeline-heading {
+         font-size: 2rem;
+         margin-bottom: 2rem;
+         color: #00ffee;
+         text-shadow: 0 0 10px #00ffee99;
+      }
+
+      .timeline-container {
+         display: flex;
+         flex-direction: column;
+         align-items: center;
+         gap: 2rem;
+      }
+
+      .timeline-item {
+         background: rgba(0, 255, 238, 0.05);
+         border: 1px solid #00ffee55;
+         border-left: 5px solid #00ffee;
+         padding: 1rem 2rem;
+         max-width: 600px;
+         width: 100%;
+         border-radius: 10px;
+         box-shadow: 0 0 15px #00ffee33;
+         text-align: left;
+      }
+
+      .timeline-date {
+         font-weight: bold;
+         color: #00ffee;
+         margin-bottom: 0.5rem;
+      }
+
+      .timeline-content h3 {
+         margin: 0;
+         color: #ffffff;
+      }
+
+      .timeline-content p {
+         margin: 0.2rem 0 0;
+         font-size: 0.95rem;
+         color: #cccccc;
+      }
+
+      .timeline-item {
+         opacity: 0;
+         transform: translateY(30px);
+         animation: fadeInUp 0.8s ease forwards;
+         }
+
+         @keyframes fadeInUp {
+         to {
+            opacity: 1;
+            transform: translateY(0);
+         }
+      }
+
+      .timeline-link {
+         text-decoration: none;
+         color: inherit;
+         width: 100%;
+         max-width: 600px;
+         display: block;
+         transition: transform 0.3s ease;
+      }
+
+      .timeline-link:hover {
+         transform: scale(1.02);
+         filter: brightness(1.1);
+      }
+
+        :root{
+    --neon: #00eaff;      /* <<< your neon color */
+    --ring-size: 28px;    /* outer ring diameter */
+    --dot-size: 8px;      /* center dot diameter */
+    --trail: 0.18s;       /* ring catch-up feel (css for click pulse) */
+  }
+
+  .card{
+    max-width: 720px;
+    padding: 28px 30px;
+    border-radius: 22px;
+    backdrop-filter: blur(8px) saturate(130%);
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    box-shadow: 0 10px 40px rgba(0,0,0,0.45), 0 0 80px rgba(0, 234, 255, 0.08);
+  }
+  h1{margin:0 0 8px;font-size: clamp(24px, 5vw, 38px);}
+  p{opacity:.8;line-height:1.6}
+
+  /* Hide the native cursor */
+  html, body, * { cursor: none !important; }
+
+  /* Cursor elements */
+  .cursor {
+    position: fixed;
+    top: 0; left: 0;
+    width: var(--ring-size);
+    height: var(--ring-size);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    /* Glow ring */
+    box-shadow:
+      0 0 6px var(--neon),
+      0 0 16px var(--neon),
+      0 0 34px var(--neon);
+    border: 2px solid color-mix(in oklab, var(--neon) 75%, white 25%);
+    background: radial-gradient(circle at center,
+      color-mix(in oklab, var(--neon) 30%, transparent 70%) 0%,
+      transparent 55%);
+    mix-blend-mode: screen;
+  }
+
+  .cursor-dot {
+    position: fixed;
+    top: 0; left: 0;
+    width: var(--dot-size);
+    height: var(--dot-size);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 10000;
+    transform: translate(-50%, -50%);
+    background: var(--neon);
+    box-shadow:
+      0 0 6px var(--neon),
+      0 0 14px var(--neon),
+      0 0 22px var(--neon);
+  }
+
+  /* Click pulse effect on the ring */
+  .cursor.pulse {
+    animation: clickPulse var(--trail) ease-out;
+  }
+  @keyframes clickPulse{
+    0%   { transform: translate(-50%, -50%) scale(1);     opacity: 1; }
+    50%  { transform: translate(-50%, -50%) scale(1.25);  opacity: .9; }
+    100% { transform: translate(-50%, -50%) scale(1);     opacity: 1; }
+  }
+
+  /* Accessibility: if user prefers reduced motion, snap to cursor */
+  @media (prefers-reduced-motion: reduce) {
+    .cursor, .cursor-dot { transition: none !important; }
+  }
+
+  /* Optional: hide on touch devices (you can remove this if you still want it visible) */
+  @media (hover: none) and (pointer: coarse) {
+    html, body, * { cursor: auto !important; }
+    .cursor, .cursor-dot { display: none; }
+  }
+
+  /* Back to Top Button */
+#backToTop {
+  display: none; /* Hidden by default */
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 100;
+  font-size: 20px;
+  border: none;
+  outline: none;
+  background: rgba(0, 255, 200, 0.2);
+  color: #0ff;
+  cursor: pointer;
+  padding: 12px 16px;
+  border-radius: 50%;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 0 10px #0ff, 0 0 20px #0ff inset;
+  transition: all 0.3s ease-in-out;
+}
+
+#backToTop:hover {
+  background: rgba(0, 255, 200, 0.4);
+  box-shadow: 0 0 15px #0ff, 0 0 30px #0ff inset;
+}
+    </style>
+  </head>
+
+  <body>
+
+      <!NAVIGATION BAR>
+      <nav>
+         <a href="{{ url_for('home') }}"><i class="fas fa-home"></i> Home</a>
+         <a href="{{ url_for('team') }}"><i class="fas fa-users"></i> Team</a>
+
+         <div class="dropdown">
+         <button class="dropbtn"><i class="fas fa-calendar-alt"></i> Events ▾</button>
+         <div class="dropdown-content">
+            <a href="{{ url_for('upcoming_events') }}">Upcoming Events</a>
+            <a href="{{ url_for('past_events') }}">Past Events</a>
+         </div>
+         </div>
+
+         <a href="{{ url_for('show_results') }}"><i class="fas fa-users"></i> Results</a>
+
+         <a href="#contact"><i class="fas fa-envelope"></i> Contact</a>
+    
+         <div class="login">
+            {% if session.get('logged_in') %}
+            <a href="{{ url_for('logout') }}"><i class="fas fa-sign-in-alt"></i> Logout</a>
+            {% else %}
+            <a href="{{ url_for('login') }}"><i class="fas fa-sign-in-alt"></i> Login</a>
+            {% endif %}
+         </div>
+
+         {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+               <div id="toast" class="toast"></div>
+            {% endif %}
+         {% endwith %}
+      </nav>
+
+      <!BANNER>
+      <div class="banner">
+         <div class="banner-content">
+            <h1 class="cyber-text">
+               <span>Versatile Information Science and Technical Aspirants...</span>
+            </h1>
+         </div>
+      </div>
+
+      <!ABOUT>
+      <div id="about" class="section">
+         <h2>About VISTA</h2>
+         <p>
+            VISTA is the official student club of the Information Science and Engineering Department at NMAMIT.
+            We bring together curious minds to collaborate, innovate, and transform ideas into impactful realities.
+            From hackathons to hands-on workshops, VISTA fuels the tech passion of every ISE student.
+         </p>
+      </div>
+
+      <!BRANCH FUND>
+      <section id="branch-fund">
+         <h2>Pay Branch Fund</h2>
+         <p>Support your department activities and unlock exclusive benefits by paying the branch fund.</p>
+
+<button onclick="handlePayNow()">Pay Now</button>
+
+<div class="payment-popup" id="paymentPopup" style="display: none;">
+   <div class="popup-content">
+      <span class="close-btn" onclick="closePaymentPopup()">&times;</span>
+      <h2>Pay Fund</h2>
+
+      <!-- Dynamic UPI Link -->
+      <a href="{{ upi_link }}" 
+         style="display: block; margin: 0 auto 10px auto; background: #00ffff; color: #000; padding: 10px 14px; border-radius: 8px; font-weight: bold; text-decoration: none; width: fit-content;">
+         Pay Using UPI App
+      </a>
+
+      <p style="text-align: center;">OR</p><br>
+
+      <!-- Dynamic QR Code -->
+      <img src="{{ qr_image }}" alt="QR Code" />
+
+      <form id="paymentForm" method="POST" action="/submit_payment">
+         <label for="name">Name:</label>
+         <input type="text" id="name" name="name" placeholder="Enter your name" required>
+
+         <label for="usn">USN:</label>
+         <input type="text" id="usn" name="usn" placeholder="Enter your USN" required>
+
+         <label for="txn">Transaction ID:</label>
+         <input type="text" id="txn" name="txn" placeholder="Enter transaction ID" required>
+
+         <button type="submit">Submit Payment</button>
+      </form>
+   </div>
+</div>
+
+         <div id="toast" style="display:none; position: fixed; bottom: 30px; right: 30px; background: #00ffcc; color: #000; padding: 12px 24px; border-radius: 8px; font-weight: bold; box-shadow: 0 0 12px #00ffcc;">
+            Thank you for paying!
+         </div>
+
+         <div class="benefits-container">
+            <div class="benefit-card">
+               <h4>Free Access to Events</h4>
+               <p>Participate in all VISTA club events without extra fees.</p>
+            </div>
+            <div class="benefit-card">
+               <h4>Exclusive Member Badge</h4>
+               <p>Get recognized as an official contributing member of the club.</p>
+            </div>
+            <div class="benefit-card">
+               <h4>Vista Premier League Access</h4>
+               <p>Eligibility to participate in the popular VPL competitions.</p>
+            </div>
+         </div>
+      </section>
+
+      <!TOAST MESSAGE>
+      <div id="toast" class="toast"></div>
+
+<section id="timeline" class="timeline-section">
+  <h2 class="timeline-heading">🕒 Upcoming Events Timeline</h2>
+  <div class="timeline-container">
+
+    <a href="/upcoming-events" class="timeline-link">
+      <div class="timeline-item">
+        <div class="timeline-date">📅 July 22, 2025</div>
+        <div class="timeline-content">
+          <h3>TechTalks</h3>
+          <p>Seminar on AI, Blockchain, Cloud & More at Hall B</p>
+        </div>
+      </div>
+    </a>
+
+    <a href="/upcoming-events" class="timeline-link">
+      <div class="timeline-item">
+        <div class="timeline-date">📅 August 10, 2025</div>
+        <div class="timeline-content">
+          <h3>Hackathon 2025</h3>
+          <p>48-Hour Code Battle - Main Auditorium</p>
+        </div>
+      </div>
+    </a>
+
+    <a href="/upcoming-events" class="timeline-link">
+      <div class="timeline-item">
+        <div class="timeline-date">📅 September 2, 2025</div>
+        <div class="timeline-content">
+          <h3>VISTA Premier League (VPL)</h3>
+          <p>Inter-department gaming & technical face-off</p>
+        </div>
+      </div>
+    </a>
+
+  </div>
+</section>
+
+
+      <!CONTACT>
+      <div id="contact" class="section" style="padding: 40px; text-align: center;">
+
+         <h2>Contact Us</h2>
+         <form id="contactForm" method="POST" action="/contact" style="max-width: 500px; margin: auto; text-align: left;">
+            <label for="name">Name:</label><br>
+            <input type="text" id="name" name="name" required style="width: 100%; padding: 8px; margin-bottom: 12px;"><br>
+
+            <label for="usn">USN:</label><br>
+            <input type="text" id="usn" name="usn" required style="width: 100%; padding: 8px; margin-bottom: 12px;"><br>
+
+            <label for="message">Message:</label><br>
+            <textarea id="message" name="message" required rows="4" style="width: 100%; padding: 8px; margin-bottom: 12px;"></textarea><br>
+
+            <button type="submit" style="background-color: #00ccff; color: white; padding: 10px 16px; border: none; border-radius: 6px; cursor: pointer;">Send</button>
+         </form>
+
+         <br>
+         <p>Follow us on Instagram: 
+            <a href="https://www.instagram.com/vista_nmamit/" target="_blank" style="color:#60a5fa; text-decoration:underline;">
+               VISTA
+            </a>
+         </p>
+         <p>Linktree: 
+            <a href="https://linktr.ee/vista_nmamit?fbclid=PAZXh0bgNhZW0CMTEAAafpsH8PjeX70EpuyvH3R9z_giWamdEzrwz7zbk95_Q7NtK-65Npb1i7ffpfVw_aem__5AbFMyBkGDiIbSthAX4vw" target="_blank" style="color:#60a5fa; text-decoration:underline;">
+               VISTA
+            </a>
+         </p>
+
+      </div>
+
+        <!-- Custom cursor elements -->
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-dot" id="cursorDot"></div>
+
+  <button onclick="scrollToTop()" id="backToTop" title="Go to top">↑</button>
+
+      <!FOOTER>
+      <footer>
+         &copy; All Rights Reserved, Vista 2025 | Designed with ❤️
+      </footer>
+
+      <!JAVA SCRIPT>
+      <script>
+
+         {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+               window.onload = function() {
+               var toast = document.getElementById("toast");
+               toast.innerText = "{{ messages[0][1] }}";
+               toast.className = "toast show";
+               setTimeout(() => toast.className = toast.className.replace("show", ""), 3000);
+               };
+            {% endif %}
+         {% endwith %}
+
+         function registerEvent(button) {
+            button.textContent = "Registered";
+            button.disabled = true;
+            button.style.backgroundColor = "#4CAF50"; // success green
+         }
+
+         function showToast(message) {
+               const toast = document.getElementById("toast");
+               toast.textContent = message;
+               toast.className = "toast show";
+               setTimeout(() => {
+               toast.className = toast.className.replace("show", "");
+            }, 3000);
+         }
+
+function handlePayNow() {
+    document.getElementById("paymentPopup").style.display = "block";
+}
+function closePaymentPopup() {
+    document.getElementById("paymentPopup").style.display = "none";
+}
+         // Toast display logic
+         function showToast(message) {
+            const toast = document.getElementById("toast");
+            toast.textContent = message;
+            toast.style.display = "block";
+            setTimeout(() => toast.style.display = "none", 3000);
+         }
+
+         // Check for flash message from backend
+         {% with messages = get_flashed_messages(with_categories=true) %}
+            {% for category, message in messages %}
+               {% if category == 'payment' %}
+               showToast("{{ message }}");
+               {% endif %}
+            {% endfor %}
+         {% endwith %}
+
+
+         (() => {
+  const ring = document.getElementById('cursor');
+  const dot  = document.getElementById('cursorDot');
+
+  // Position state
+  let mouseX = window.innerWidth / 2;
+  let mouseY = window.innerHeight / 2;
+  let ringX = mouseX;
+  let ringY = mouseY;
+
+  // Smoothness (0..1) — lower = more floaty/inertial
+  const easing = 0.18;
+
+  // Update target on mouse move
+  window.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+    dot.style.transform = `translate(${mouseX - 0.5*parseFloat(getComputedStyle(dot).width)}px, ${mouseY - 0.5*parseFloat(getComputedStyle(dot).height)}px)`;
+  }, { passive: true });
+
+  // Pulse on click
+  window.addEventListener('mousedown', () => {
+    ring.classList.remove('pulse');
+    // Force reflow to restart animation
+    void ring.offsetWidth;
+    ring.classList.add('pulse');
+  });
+
+  // Animation loop for smooth ring follow
+  function animate() {
+    const dx = mouseX - ringX;
+    const dy = mouseY - ringY;
+    ringX += dx * easing;
+    ringY += dy * easing;
+    ring.style.transform = `translate(${ringX - 0.5*parseFloat(getComputedStyle(ring).width)}px, ${ringY - 0.5*parseFloat(getComputedStyle(ring).height)}px)`;
+    requestAnimationFrame(animate);
+  }
+  animate();
+
+  // Keep inside viewport on resize
+  window.addEventListener('resize', () => {
+    mouseX = Math.min(Math.max(mouseX, 0), window.innerWidth);
+    mouseY = Math.min(Math.max(mouseY, 0), window.innerHeight);
+  });
+
+  // Optional: make ring slightly larger when hovering clickable elements
+  const hoverables = ['a','button','input','textarea','select','[role="button"]','[data-hover]'];
+  document.addEventListener('mouseover', (e) => {
+    if (hoverables.some(sel => e.target.closest(sel))) {
+      ring.style.transition = 'transform 120ms ease';
+      ring.style.transform += ' scale(1.2)';
+    }
+  });
+  document.addEventListener('mouseout', (e) => {
+    if (hoverables.some(sel => e.target.closest(sel))) {
+      // remove the extra scale; position transform is reapplied in the next frame
+    }
+  });
+})();
+
+// Show button when scrolled down
+window.onscroll = function() {
+  let btn = document.getElementById("backToTop");
+  if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+    btn.style.display = "block";
+  } else {
+    btn.style.display = "none";
+  }
+};
+
+// Scroll to top smoothly
+function scrollToTop() {
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+      </script>
+   </body>
+</html>

@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Event Results | ISE Dept</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap');
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Orbitron', sans-serif;
+      background: linear-gradient(135deg, #0f0f0f, #1a1a2e);
+      color: #ffffff;
+    }
+    header, footer {
+      background: rgba(10, 46, 92, 0.3);
+      padding: 20px;
+      text-align: center;
+      border-bottom: 2px solid #00ffff;
+      box-shadow: 0 0 15px #00ffff;
+      backdrop-filter: blur(10px);
+    }
+    header h1 {
+      font-size: 2.5rem;
+      color: #00ffff;
+      text-shadow: 0 0 8px #00ffff;
+    }
+    .events-section {
+      padding: 60px 20px;
+    }
+    .events-section h2 {
+      font-size: 2.2rem;
+      margin-bottom: 30px;
+      color: #f4ce14;
+      text-align: center;
+      text-shadow: 0 0 6px #f4ce14;
+    }
+    .event-container {
+      display: flex;
+      gap: 30px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .event-card {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 20px;
+      box-shadow: 0 8px 25px rgba(0, 255, 255, 0.2);
+      width: 300px;
+      padding: 20px;
+      text-align: center;
+      backdrop-filter: blur(15px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      transition: transform 0.3s ease;
+    }
+    .event-card:hover {
+      transform: scale(1.03);
+      box-shadow: 0 0 20px #00ffff;
+    }
+    .event-card img {
+      width: 100%; border-radius: 15px; height: 180px; object-fit: cover; margin-bottom: 15px;
+    }
+    .event-card h3 {
+      font-size: 1.3rem;
+      color: #00ffff;
+      text-shadow: 0 0 4px #00ffff;
+    }
+    .event-card p { font-size: 0.95rem; color: #ddd; margin-bottom: 12px; }
+    .event-date { color: #f4ce14; font-weight: bold; }
+    .result-btn {
+      padding: 8px 16px;
+      background: #f4ce14;
+      border: none;
+      border-radius: 20px;
+      color: #000;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .popup {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.95);
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      z-index: 999;
+      padding: 40px 20px;
+      overflow-y: auto;
+    }
+    .popup .close-icon {
+      position: absolute;
+      top: 20px; right: 30px;
+      font-size: 30px;
+      color: #f4ce14;
+      cursor: pointer;
+    }
+    .result-details {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+      margin-top: 20px;
+    }
+    .result-card {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 20px;
+      border-radius: 15px;
+      width: 250px;
+      text-align: center;
+      box-shadow: 0 0 10px #00ffff;
+    }
+    .result-card img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 10px;
+    }
+    footer {
+      margin-top: 50px;
+      border-top: 2px solid #00ffff;
+      box-shadow: 0 0 15px #00ffff;
+      backdrop-filter: blur(10px);
+    }
+  </style>
+</head>
+<body>
+  <header><h1>Results</h1></header>
+  <section class="events-section">
+    <div class="event-container">
+      <div class="event-card">
+        <img src="/static/images/devidas.jpg" alt="TechFusion">
+        <h3>TechFusion 2024</h3>
+        <p class="event-date">10th Jan 2024</p>
+        <p>Annual fest with coding events & tech exhibits.</p>
+        <button class="result-btn" onclick="openPopup('event1')">View Result</button>
+      </div>
+      <!-- Add this inside the <div class="event-container"> -->
+<div class="event-card">
+  <img src="/static/images/codesprint.jpg" alt="CodeSprint">
+  <h3>CodeSprint 2024</h3>
+  <p class="event-date">22nd Feb 2024</p>
+  <p>Inter-college coding battle. Teams of 3.</p>
+  <button class="result-btn" onclick="openPopup('event2')">View Result</button>
+</div>
+
+    </div>
+  </section>
+
+  <div class="popup" id="popup">
+    <span class="close-icon" onclick="closePopup()">&times;</span>
+    <h2 style="color:#f4ce14; text-shadow:0 0 5px #f4ce14;">Event Results</h2>
+    <div class="result-details" id="resultDetails"></div>
+  </div>
+
+  <footer>
+    &copy; 2025 Department of Information Science & Engineering | NMAMIT
+  </footer>
+
+<script>
+  const eventResults = {
+    event1: [
+      { name: "Devidas Rao", usn: "4NM21IS001", year: "3rd Year", photo: "/static/images/devidas.jpg" },
+      { name: "Anjali Bhat", usn: "4NM21IS045", year: "3rd Year", photo: "/static/images/preethi.jpg" },
+      { name: "Rohan Shetty", usn: "4NM21IS099", year: "2nd Year", photo: "/static/images/vaikunt.jpg" }
+    ],
+    event2: [
+      {
+        team: [
+          { name: "Kiran M", usn: "4NM21IS034", year: "3rd Year", photo: "/static/images/chinmai.jpg" },
+          { name: "Sneha Rai", usn: "4NM21IS067", year: "3rd Year", photo: "/static/images/rashmi.jpg" },
+          { name: "Nithin D", usn: "4NM21IS021", year: "3rd Year", photo: "/static/images/vaikunt.jpg" }
+        ]
+      },
+      {
+        team: [
+          { name: "Varsha N", usn: "4NM21IS057", year: "2nd Year", photo: "/static/images/varsha.jpg" },
+          { name: "Pranav K", usn: "4NM21IS088", year: "2nd Year", photo: "/static/images/pranav.jpg" },
+          { name: "Riya Shetty", usn: "4NM21IS103", year: "2nd Year", photo: "/static/images/riya.jpg" }
+        ]
+      },
+      {
+        team: [
+          { name: "Akash Shetty", usn: "4NM21IS025", year: "1st Year", photo: "/static/images/akash.jpg" },
+          { name: "Bhavana G", usn: "4NM21IS031", year: "1st Year", photo: "/static/images/bhavana.jpg" },
+          { name: "Devika Pai", usn: "4NM21IS059", year: "1st Year", photo: "/static/images/devika.jpg" }
+        ]
+      }
+    ]
+  };
+
+  const placeBadges = ["🥇 1st Place", "🥈 2nd Place", "🥉 3rd Place"];
+
+  function openPopup(eventKey) {
+    const results = eventResults[eventKey];
+    const container = document.getElementById("resultDetails");
+    container.innerHTML = "";
+
+    if (eventKey === 'event1') {
+      // Individual participants
+      results.forEach((r, index) => {
+        const div = document.createElement("div");
+        div.className = "result-card";
+        div.innerHTML = `
+          <span class="place-badge">${placeBadges[index]}</span>
+          <img src="${r.photo}" alt="${r.name}" />
+          <h4>${r.name}</h4>
+          <p><strong>USN:</strong> ${r.usn}</p>
+          <p><strong>Year:</strong> ${r.year}</p>
+        `;
+        container.appendChild(div);
+      });
+    } else {
+      // Team results
+      results.forEach((teamObj, index) => {
+        const teamDiv = document.createElement("div");
+        teamDiv.className = "result-card";
+        teamDiv.innerHTML = `<span class="place-badge">${placeBadges[index]}</span><h4>Team ${index + 1}</h4>`;
+        teamObj.team.forEach(member => {
+          teamDiv.innerHTML += `
+            <img src="${member.photo}" alt="${member.name}" style="width: 80px; height: 80px; margin: 5px; border-radius: 50%;" />
+            <p><strong>${member.name}</strong><br>USN: ${member.usn}<br>Year: ${member.year}</p>
+            <hr style="border-color: #00ffff50;">
+          `;
+        });
+        container.appendChild(teamDiv);
+      });
+    }
+
+    document.getElementById("popup").style.display = "flex";
+  }
+
+  function closePopup() {
+    document.getElementById("popup").style.display = "none";
+  }
+
+</script>
+
+</body>
+</html>

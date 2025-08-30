@@ -1,0 +1,1058 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>NMAMIT | ISE Dept</title>
+  <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/nitte.jpg') }}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f4f4f4;
+      color: #333;
+    }
+
+    header {
+  background-color: #002147;
+  color: #fff;
+  padding: 1.5rem 1rem;
+  text-align: center;
+}
+
+.header-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.logo {
+  height: 70px;
+  margin-bottom: 1rem;
+  mix-blend-mode: color-burn;
+  border-radius: 10px;
+}
+
+.header-text h1 {
+  font-size: 1.4rem;
+  margin: 0;
+}
+
+.header-text h2 {
+  font-size: 1.8rem;
+  margin: 0.2rem 0 0 0;
+}
+
+
+    nav {
+      display: flex;
+      justify-content: center;
+      background-color: #003366;
+      padding: 0.6rem 0;
+        display: flex;
+  align-items: center;
+  gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    nav a {
+      color: #fff;
+      padding: 0.7rem 1.2rem;
+      margin: 0 0.3rem;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 18px;
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+
+    nav a:hover {
+      background-color: #00c9a7;
+      color: #003366;
+      border-radius: 5px;
+    }
+
+    .welcome {
+      text-align: center;
+      padding: 0rem 1rem;
+    }
+
+    
+.dropdown {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+/* Dropdown Menu */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #004080;
+  min-width: 160px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+  z-index: 1000;
+  border-radius: 6px;
+  margin-top: 0px;
+  flex-direction: column;
+}
+
+/* Dropdown Menu Items */
+.dropdown-content a {
+  color: #ffffff;
+  padding: 10px 16px;
+  text-decoration: none;
+  display: block;
+  font-size: 15px;
+  transition: background-color 0.3s;
+}
+
+.dropdown-content a:hover {
+  background-color: #0059b3;
+  color: #00d1b2;
+}
+
+.dropdown:hover .dropdown-content {
+  display: flex;
+}
+
+    .stats-section {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2.1rem;
+  padding: 2rem 2rem;
+  background-color: #f0f4f8;
+}
+
+.stats-card {
+  background: #002147;
+  color: white;
+  padding: 1rem;
+  border-radius: 15px;
+  text-align: center;
+  width: 220px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease;
+}
+
+.stats-card:hover {
+  transform: translateY(-5px);
+  background-color: #003366;
+}
+
+.stats-card h2 {
+  font-size: 2.75rem;
+  margin-bottom: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+.stats-card p {
+  font-size: 1.25rem;
+  margin: 0;
+  margin-bottom: 0.5rem;
+}
+
+
+    footer {
+      background-color: #003366;
+      color: #fff;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    footer h1 {
+      margin-bottom: 1rem;
+      text-align: left;
+      margin-left: 2rem;
+      font-weight: bold;
+    }
+
+    .links {
+      background: linear-gradient(to right, #002147, #003366);
+      border-radius: 10px;
+    }
+
+    .links {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      padding: 0rem 0;
+    }
+
+    .links ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .links li {
+      margin: 0rem 0;
+    }
+
+    .links a {
+      color: #fff;
+      text-decoration: none;
+    }
+
+    .links a:hover {
+      color: #00c9a7;
+    }
+
+    .wrapper {
+      margin: 1rem 0;
+    }
+
+    .icon {
+      display: inline-block;
+      margin: 0 0.5rem;
+      color: white;
+      font-size: 1.2rem;
+      transition: color 0.3s ease;
+    }
+
+    .icon:hover {
+      color: #00c9a7;
+    }
+
+    .copy {
+      margin-top: 1rem;
+      font-size: 0.9rem;
+    }
+.faculty-section {
+  background: #f8f9fa;
+  padding: 20px 10px;
+  text-align: center;
+}
+
+.faculty-section h2 {
+  font-size: 2em;
+  color: #003366;
+  margin-bottom: 20px;
+}
+
+.faculty-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.faculty-card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  padding: 20px;
+  width: 290px;
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.faculty-card:hover {
+  transform: translateY(-5px);
+}
+
+.faculty-card img {
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.faculty-card h3 {
+  font-size: 18px;
+  margin-bottom: 6px;
+  color: #003366;
+}
+
+.faculty-card p {
+  font-size: 14px;
+  margin: 4px 0;
+  color: #444;
+}
+
+
+.back-to-top {
+                position: fixed;
+                bottom: 80px;
+                right: 15px;
+                width: 50px;
+                height: 50px;
+                background: linear-gradient(135deg,#ff7eb3,#ff758c);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 50%;
+                opacity: 0;
+                visibility: hidden;
+                transform: translateY(10px);
+                text-decoration: none;
+                transition: all 0.3s ease-in-out;
+                box-shadow: 0 5px 10px rgba(255, 117, 140, 0.5);
+            }
+            .back-to-top.show {
+                opacity: 1;
+                visibility: visible;
+                transform: translateY(0px);
+            }
+            .back-to-top:hover {
+                background: linear-gradient(135deg, #ff758c, #ff7eb3);
+                box-shadow: 0 8px 20px rgba(255, 117, 140, 0.7);
+                transform: scale(1.1);
+            }
+            .back-to-top svg {
+                width: 30px;
+                height: 30px;
+                fill: white;
+                transition: transform 0.3s ease-in-out;
+            }
+            .back-to-top:hover svg {
+                transform: translateY(-3px);
+            }
+            html {
+                scroll-behavior: smooth;
+            }
+
+            .chatbot {
+  position: fixed;
+  bottom: 30px;
+  right: 15px;
+  z-index: 999;
+}
+
+.chat-toggle {
+  background: linear-gradient(135deg,#cb2f70,#eaa6b1);
+  color: #fff;
+  border: none;
+  border-radius: 30px;
+  padding: 0.6rem 1rem;
+  font-size: 1rem;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.chat-toggle:hover {
+  background-color: #00b39a;
+}
+
+.chat-box {
+  display: none;
+  position: absolute;
+  bottom: 60px;
+  right: 0;
+  width: 280px;
+  background: #fff;
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+  overflow: hidden;
+  flex-direction: column;
+  font-family: Arial, sans-serif;
+}
+
+.chat-header {
+  background: #002147;
+  color: #fff;
+  padding: 0.6rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.95rem;
+}
+
+.chat-messages {
+  max-height: 200px;
+  overflow-y: auto;
+  padding: 0.5rem;
+  font-size: 0.85rem;
+}
+
+.chat-messages .bot-message,
+.chat-messages .user-message {
+  margin: 0.5rem 0;
+  padding: 0.4rem;
+  border-radius: 10px;
+  width: fit-content;
+  max-width: 85%;
+}
+
+.bot-message {
+  background: #f0f0f0;
+  align-self: flex-start;
+}
+
+.user-message {
+  background: #00c9a7;
+  color: #fff;
+  align-self: flex-end;
+  margin-left: auto;
+}
+
+#chatInput {
+  border: none;
+  border-top: 1px solid #ccc;
+  padding: 0.5rem;
+  width: 70%;
+  outline: none;
+}
+
+#chatSend {
+  width: 30%;
+  border: none;
+  background: #002147;
+  color: #fff;
+  padding: 0.5rem;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.login {
+  margin-top: 10px;
+}
+
+.toast {
+    visibility: hidden;
+    min-width: 250px;
+    background-color: #4CAF50;
+    color: white;
+    text-align: center;
+    padding: 12px;
+    position: fixed;
+    z-index: 999;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 8px;
+  }
+
+  .toast.show {
+    visibility: visible;
+    animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  }
+
+  @keyframes fadein {
+    from {bottom: 10px; opacity: 0;}
+    to {bottom: 30px; opacity: 1;}
+  }
+
+  @keyframes fadeout {
+    from {bottom: 30px; opacity: 1;}
+    to {bottom: 10px; opacity: 0;}
+  }
+
+#placed-students {
+  padding: 60px 20px;
+  background-color: #f7f7f7;
+  text-align: center;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+#placed-students h2 {
+  font-size: 2.5rem;
+  margin-bottom: 30px;
+  color: #333;
+  font-weight: bold;
+}
+
+.slider-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.placed-container {
+  display: flex;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  gap: 20px;
+  padding: 10px;
+}
+
+.placed-container::-webkit-scrollbar {
+  display: none;
+}
+
+.student-card {
+  min-width: 220px;
+  background-color: #fff;
+  border-radius: 20px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  text-align: center;
+  transition: transform 0.3s;
+}
+
+.student-card:hover {
+  transform: translateY(-5px);
+}
+
+.student-card img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-bottom: 15px;
+}
+
+.student-card h3 {
+  margin: 10px 0 5px;
+  font-size: 1.1rem;
+}
+
+.student-card p {
+  font-size: 0.9rem;
+  margin: 4px 0;
+}
+
+.read-more-btn {
+  margin-top: 10px;
+  padding: 8px 18px;
+  font-size: 0.9rem;
+  color: #333;
+  border: 2px solid #f4ce14;
+  border-radius: 25px;
+  background: transparent;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.read-more-btn:hover {
+  background-color: #f4ce14;
+  color: black;
+}
+
+.arrow {
+  font-size: 30px;
+  background-color: #fff;
+  border: none;
+  border-radius: 50px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  padding: 10px;
+  margin: 0 10px;
+  cursor: pointer;
+  z-index: 10;
+  transition: 0.3s ease;
+}
+
+.arrow:hover {
+  background-color: #f4ce14;
+}
+html {
+    scroll-behavior: smooth;
+}
+
+.btn-auth {
+  background-color: #00c9a7; /* orange button */
+  color: white;
+  padding: 8px 15px;
+  border-radius: 5px;
+  margin-left: auto; /* pushes to right in flex nav */
+  text-decoration: none;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.btn-auth:hover {
+  background-color: #ccf5f886;
+}
+
+  </style>
+</head>
+<body>
+
+  <!-- Header with Logo and Titles -->
+  <header style="display: flex; align-items: center; justify-content: center; flex-direction: column;">
+  <div style="position: absolute; top: 10px; left: 20px;">
+  <img src="{{ url_for('static', filename='images/nitte.jpg') }}" 
+       alt="NMAMIT Logo" 
+       style="
+         height: 100px; 
+         width: 100px; 
+         border-radius: 20px;
+         mix-blend-mode: multiply;
+         background-color: #002a5c;">
+</div>
+
+  <h2 style="margin: 0;">NMAM Institute of Technology</h2>
+  <h1 style="margin: 0;">Department of Information Science & Engineering</h1>
+</header>
+
+  <!-- Navigation Bar -->
+<nav>
+  <a href="/"><i class="fas fa-home"></i> Home</a>
+  <a href="https://studentportal.universitysolutions.in/" target="_blank"><i class="fas fa-user-graduate"></i> Student Portal</a>
+  <a href="/gallery"><i class="fas fa-image"></i> Gallery</a>
+
+  <div class="dropdown">
+    <a href="#"><i class="fas fa-book"></i> Resources <i class="fas fa-caret-down"></i></a>
+    <div class="dropdown-content">
+      <a href="/resources/2nd-year">2nd Year</a>
+      <a href="/resources/3rd-year">3rd Year</a>
+      <a href="/resources/4th-year">4th Year</a>
+    </div>
+  </div>
+
+  <a href="/circular"><i class="fas fa-bullhorn"></i> Circulars</a>
+  <a href="/vista" target="_blank"><i class="fas fa-users-cog"></i> VISTA</a>
+
+  <!-- Sign In / Sign Up Button -->
+  <a href="/login"><i class="fas fa-sign-in-alt"></i> Sign In / Sign Up</a>
+</nav>
+
+
+  <marquee direction="left">
+            <h3>Hello Everyone, Welcome to our department of Information Science and Engineering Branch</h3>
+        </marquee>
+
+  <!-- Main Welcome Section -->
+  <main>
+    <section class="welcome">
+      <h2>Welcome to Our Department</h2>
+        <p style="text-align: left;">
+         The Department of Information Science & Engineering (ISE), was established in the year 1999 . To accommodate the needs of the software industry, the Department was founded with an initial intake of 40 students. Further, the intake was increased to 60 in the year 2000 and subsequently to 120, 180 and 240 in the year 2016,2019 and 2024 respectively. This course is designed to provide a comprehensive understanding of the principles, theories, and practical applications that form the foundation of Information Science, a dynamic field at the intersection of computer science, mathematics, and engineering. This course helps the students to delve into diverse and evolving landscape of information systems, data management, and computational intelligence. Information Science Engineering plays a pivotal role in our increasingly digitized and interconnected world, influencing the way we communicate, process information, and make decisions.
+        </p>
+    </section>
+  </main>
+
+    <section class="stats-section">
+    <div class="stats-card">
+        <h2>25+</h2>
+        <p>Years of Excellence</p>
+    </div>
+    <div class="stats-card">
+        <h2>50+</h2>
+        <p>Expert Faculties</p>
+    </div>
+    <div class="stats-card">
+        <h2>2000+</h2>
+        <p>Students Enrolled</p>
+    </div>
+    <div class="stats-card">
+        <h2>100%</h2>
+        <p>Placement Assurance</p>
+    </div>
+    </section>
+
+    <!-- Vision Section -->
+<section id="vision" style="padding: 40px; background-color: #f3f9ff;">
+  <h2 style="text-align: center;font-size: 30px;margin-bottom: 15px;color: #0a2e5c;">Our Vision</h2>
+  <p style="max-width: 900px; margin: auto; font-size: 18px; text-align: center;">
+    To achieve excellence in information science and engineering by empowering students with state-of-the-art technologies and skills, inspiring them to drive innovation and entrepreneurship in addressing global challenges.
+  </p>
+</section>
+
+<!-- Mission Section -->
+<section id="mission" style="padding: 40px; background-color: #ffffff;">
+  <h2 style="text-align: center;font-size: 30px;margin-bottom: 15px;color: #0a2e5c;">Our Mission</h2>
+  <ul style="max-width: 900px; margin: auto; font-size: 18px; line-height: 1.8;">
+    <li>M1:Offer state-of-the-art curriculum through comprehensive pedagogical methods.</li>
+    <li>M2: Collaborate with industries and research institutions to address real-world challenges.</li>
+    <li>M3: Provide an environment that fosters creativity, critical thinking, innovation and entrepreneurship.</li>
+  </ul>
+</section>
+
+<!-- HOD's Message Section -->
+<section id="hod-message" style="padding: 40px 20px; background-color: #eef6fb;">
+  <div style="max-width: 800px; margin: auto;">
+    <div style="background-color: #fff; border-radius: 16px; box-shadow: 0 8px 20px rgba(0,0,0,0.08); padding: 20px; display: flex; flex-direction: column; align-items: center; text-align: center; border: 1px solid #dce3ec;">
+      
+      <img src="{{ url_for('static', filename='images/ashwini.jpg') }}" alt="HOD Photo" style="width: 140px; height: 140px; border-radius: 50%; object-fit: cover; border: 4px solid #0056a3; margin-bottom: 20px;">
+      
+      <h2 style="font-size: 26px; color: #003366; margin-bottom: 15px;">HOD's Message</h2>
+      
+      <p style="font-size: 17px; color: #444; line-height: 1.6; margin-bottom: 20px;">
+        Welcome to the Department of Information Science & Engineering. We strive to cultivate a dynamic academic environment that promotes excellence in teaching, learning, and research. Our department equips students with skills to become visionary technology leaders and responsible global citizens.
+      </p>
+      
+      <p style="font-size: 16px; font-weight: bold; color: #0056a3; margin-top: 10px;">Dr. Ashwini B<br><span style="font-weight: normal; color: #555;">Head of the Department</span></p>
+    </div>
+  </div>
+</section>
+
+
+<section id="faculty-section" class="faculty-section">
+  <h2>Faculty</h2>
+  <div class="faculty-container">
+    
+    <div class="faculty-card">
+      <img src="static/images/karuna.jpg" alt="Faculty Photo">
+      <h3>Dr. KARUNA PANDIT</h3>
+      <p>Professor</p>
+      <p><strong>Cabin:</strong> Room No. 101, ISE Block</p>
+      <p><strong>Email:</strong> karunapandit@nitte.edu.in</p>
+    </div>
+
+    <div class="faculty-card">
+      <img src="static/images/balasubramani.jpg" alt="Faculty Photo">
+      <h3>Dr. BALASUBRAMANI R</h3>
+      <p>Professor</p>
+      <p><strong>Cabin:</strong> Room No. 102, ISE Block</p>
+      <p><strong>Email:</strong> balasubramani.r@nitte.edu.in</p>
+    </div>
+
+    <div class="faculty-card">
+      <img src="static/images/vasudevaa.jpg" alt="Faculty Photo">
+      <h3>Dr. VASUDEVA</h3>
+      <p>Professor</p>
+      <p><strong>Cabin:</strong> Room No. 103, ISE Block</p>
+      <p><strong>Email:</strong>  Vasudeva.acharya@nitte-edu.in</p>
+    </div>
+
+    <div class="faculty-card">
+      <img src="static/images/usha.jpg" alt="Faculty Photo">
+      <h3>Dr. USHA DIVAKARLA</h3>
+      <p>Professor</p>
+      <p><strong>Cabin:</strong> Room No. 104, ISE Block</p>
+      <p><strong>Email:</strong> ushad@nitte.edu.in</p>
+    </div>
+
+    <div class="faculty-card">
+      <img src="static/images/manjula.jpg" alt="Faculty Photo">
+      <h3>Dr. MANJULA GURURAJ RAO</h3>
+      <p>Professor</p>
+      <p><strong>Cabin:</strong> Room No. 104, ISE Block</p>
+      <p><strong>Email:</strong>  dr.manjulagururajh@nitte.edu.in</p>
+    </div>
+
+    <div class="faculty-card">
+      <img src="static/images/sumathi.jpg" alt="Faculty Photo">
+      <h3>Dr.SUMATHI PAWAR</h3>
+      <p>Professor</p>
+      <p><strong>Cabin:</strong> Room No. 104, ISE Block</p>
+      <p><strong>Email:</strong> drsumathi@nitte.edu.in</p>
+    </div>
+
+    <div class="faculty-card">
+      <img src="static/images/ashwini.jpg" alt="Faculty Photo">
+      <h3>Dr. ASHWINI B</h3>
+      <p>Professor</p>
+      <p><strong>Cabin:</strong> Room No. 104, ISE Block</p>
+      <p><strong>Email:</strong>  ashwinib@nitte.edu.in</p>
+    </div>
+
+    <div class="faculty-card">
+      <img src="static/images/ravi.jpg" alt="Faculty Photo">
+      <h3>Dr. RAVI B</h3>
+      <p>Professor</p>
+      <p><strong>Cabin:</strong> Room No. 104, ISE Block</p>
+      <p><strong>Email:</strong> ravib671@nitte.edu.in</p>
+    </div>
+
+    <div class="faculty-card">
+      <img src="static/images/naganna.jpg" alt="Faculty Photo">
+      <h3>Dr. NAGANNA CHETTY</h3>
+      <p>Professor</p>
+      <p><strong>Cabin:</strong> Room No. 104, ISE Block</p>
+      <p><strong>Email:</strong>  naganna.chetty@nitte.edu.in</p>
+    </div>
+
+    <div class="faculty-card">
+      <img src="static/images/jason.jpg" alt="Faculty Photo">
+      <h3>Dr. JASON ELROY MARTIS</h3>
+      <p>Professor</p>
+      <p><strong>Cabin:</strong> Room No. 104, ISE Block</p>
+      <p><strong>Email:</strong>  jason1987martis@nitte.edu.in</p>
+    </div>
+
+    <div class="faculty-card">
+      <img src="static/images/vandana.jpg" alt="Faculty Photo">
+      <h3>Dr. VANDANA B S</h3>
+      <p>Professor</p>
+      <p><strong>Cabin:</strong> Room No. 104, ISE Block</p>
+      <p><strong>Email:</strong>  vandana.bs@nitte.edu.in</p>
+    </div>
+    
+    <div class="faculty-card">
+      <img src="static/images/preethi.jpg" alt="Faculty Photo">
+      <h3>Dr. PREETHI SALIAN K</h3>
+      <p>Professor</p>
+      <p><strong>Cabin:</strong> Room No. 104, ISE Block</p>
+      <p><strong>Email:</strong> preethi.salian@nitte.edu.in</p>
+    </div>
+
+    <div class="faculty-card">
+      <img src="static/images/sunil.jpg" alt="Faculty Photo">
+      <h3>Dr. BOLA SUNIL KAMATH</h3>
+      <p>Professor</p>
+      <p><strong>Cabin:</strong> Room No. 104, ISE Block</p>
+      <p><strong>Email:</strong>  sunilkamath@nitte.edu.in</p>
+    </div>
+
+    <div class="faculty-card">
+      <img src="static/images/devidas.jpg" alt="Faculty Photo">
+      <h3>Dr. DEVIDAS</h3>
+      <p>Professor</p>
+      <p><strong>Cabin:</strong> Room No. 104, ISE Block</p>
+      <p><strong>Email:</strong>  devidasbhat@nitte.edu.in</p>
+    </div>
+    
+    <div class="faculty-card">
+      <img src="static/images/vasudevap.jpg" alt="Faculty Photo">
+      <h3>Mr. VASUDEVA PAI</h3>
+      <p>Professor</p>
+      <p><strong>Cabin:</strong> Room No. 104, ISE Block</p>
+      <p><strong>Email:</strong> paivasudeva@nitte.edu.in</p>
+    </div>
+
+    <div class="faculty-card">
+      <img src="static/images/deepa.jpg" alt="Faculty Photo">
+      <h3>Dr. DEEPA</h3>
+      <p>Professor</p>
+      <p><strong>Cabin:</strong> Room No. 104, ISE Block</p>
+      <p><strong>Email:</strong>  deepashetty17@nitte.edu.in</p>
+    </div>
+
+    <div class="faculty-card">
+      <img src="static/images/rashmi.jpg" alt="Faculty Photo">
+      <h3>Dr. RASHMI NAVEEN</h3>
+      <p>Professor</p>
+      <p><strong>Cabin:</strong> Room No. 104, ISE Block</p>
+      <p><strong>Email:</strong>  rashmin@nitte.edu.in</p>
+    </div>
+
+    <div class="faculty-card">
+      <img src="static/images/vaikunt.jpg" alt="Faculty Photo">
+      <h3>Dr. VAIKUNTH PAI</h3>
+      <p>Professor</p>
+      <p><strong>Cabin:</strong> Room No. 104, ISE Block</p>
+      <p><strong>Email:</strong> vaikunth.pai@nitte.edu.in</p>
+    </div>
+
+    <div class="faculty-card">
+      <img src="static/images/chinmai.jpg" alt="Faculty Photo">
+      <h3>Dr. CHINMAI SHETTY</h3>
+      <p>Professor</p>
+      <p><strong>Cabin:</strong> Room No. 104, ISE Block</p>
+      <p><strong>Email:</strong> chinmai@nitte.edu.in</p>
+    </div>
+
+    <div class="faculty-card">
+      <img src="static/images/krishna.jpg" alt="Faculty Photo">
+      <h3>Mr. KRISHNARAJ RAO</h3>
+      <p>Professor</p>
+      <p><strong>Cabin:</strong> Room No. 104, ISE Block</p>
+      <p><strong>Email:</strong> krishnaraj.rao@nitte.edu.in</p>
+    </div>
+    <div class="faculty-card">
+      <img src="static/images/santhosh.jpg" alt="Faculty Photo">
+      <h3>Dr. SANTHOSH S</h3>
+      <p>Professor</p>
+      <p><strong>Cabin:</strong> Room No. 104, ISE Block</p>
+      <p><strong>Email:</strong> santhosh.s@nitte.edu.in</p>
+    </div>
+
+    <div class="faculty-card">
+      <img src="static/images/ramesh.jpg" alt="Faculty Photo">
+      <h3>Dr. RAMESH G</h3>
+      <p>Professor</p>
+      <p><strong>Cabin:</strong> Room No. 104, ISE Block</p>
+      <p><strong>Email:</strong> ramesh.g@nitte.edu.in</p>
+    </div>
+    <div class="faculty-card">
+      <img src="static/images/srikanth.jpg" alt="Faculty Photo">
+      <h3>Mr. SRIKANTH BHAT K.</h3>
+      <p>Professor</p>
+      <p><strong>Cabin:</strong> Room No. 104, ISE Block</p>
+      <p><strong>Email:</strong> srikanthbhatk@nitte.edu.in</p>
+    </div>
+
+    <div class="faculty-card">
+      <img src="static/images/alaka.jpg" alt="Faculty Photo">
+      <h3>Ms. ALAKA ANANTH</h3>
+      <p>Professor</p>
+      <p><strong>Cabin:</strong> Room No. 104, ISE Block</p>
+      <p><strong>Email:</strong>   alaka_ananth@nitte.edu.in</p>
+    </div>
+
+    <div class="faculty-card">
+      <img src="static/images/prathyakshini.jpg" alt="Faculty Photo">
+      <h3>Ms. PRATHYAKSHINI</h3>
+      <p>Professor</p>
+      <p><strong>Cabin:</strong> Room No. 104, ISE Block</p>
+      <p><strong>Email:</strong> prathyakshini@nitte.edu.in
+</p>
+    </div>
+
+    <div class="faculty-card">
+      <img src="static/images/pratheeksha.jpg" alt="Faculty Photo">
+      <h3>Ms. PRATHEEKSHA HEGDE N</h3>
+      <p>Professor</p>
+      <p><strong>Cabin:</strong> Room No. 104, ISE Block</p>
+      <p><strong>Email:</strong> pratheeksha.hegde@nitte.edu.in</p>
+    </div>
+    <div class="faculty-card">
+      <img src="static/images/sharath.jpg" alt="Faculty Photo">
+      <h3>Mr. SHARATH KUMAR</h3>
+      <p>Professor</p>
+      <p><strong>Cabin:</strong> Room No. 104, ISE Block</p>
+      <p><strong>Email:</strong> Sharath.sk@nitte.edu.in</p>
+    </div>
+
+    <div class="faculty-card">
+      <img src="static/images/prashanth.jpg" alt="Faculty Photo">
+      <h3>Mr. PRASHANTH KUMAR</h3>
+      <p>Professor</p>
+      <p><strong>Cabin:</strong> Room No. 104, ISE Block</p>
+      <p><strong>Email:</strong>  prashanth.kumar@nitte.edu.in</p>
+    </div>
+    <div class="faculty-card">
+      <img src="static/images/anusha.jpg" alt="Faculty Photo">
+      <h3>Ms. ANUSHA N</h3>
+      <p>Professor</p>
+      <p><strong>Cabin:</strong> Room No. 104, ISE Block</p>
+      <p><strong>Email:</strong> anusha24@nitte.edu.in </p>
+    </div>
+
+    <div class="faculty-card">
+      <img src="static/images/tanzila.jpg" alt="Faculty Photo">
+      <h3>Ms. TANZILA NARGIS</h3>
+      <p>Professor</p>
+      <p><strong>Cabin:</strong> Room No. 104, ISE Block</p>
+      <p><strong>Email:</strong> tanzilanargis@nitte.edu.in</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- Add this inside your <body> before the back-to-top icon -->
+<div class="chatbot">
+  <button id="chatToggle" class="chat-toggle">💬</button>
+  <div id="chatBox" class="chat-box">
+    <div class="chat-header">
+      <strong>Chat Assistant</strong>
+      <span id="chatClose" style="cursor:pointer;">&times;</span>
+    </div>
+    <div class="chat-messages" id="chatMessages">
+      <div class="bot-message">Hi! How can I help you today?</div>
+    </div>
+    <input type="text" id="chatInput" placeholder="Type your question..." />
+    <button id="chatSend">Send</button>
+  </div>
+</div>
+
+
+    <div class="content">
+        <a href="#" class="back-to-top" id="backToTop">
+             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="36px" height="36px">
+                      <path d="M0 0h24v24H0z" fill="none"/>
+                      <path d="M4 12l1.41 1.41L11 7.83V20h2V7.83l5.59 5.58L20 12l-8-8z"/>
+              </svg>
+        </a>
+    </div>
+
+  <!-- Footer Section -->
+  <footer>
+    <h1>Department of Information Science and Engineering</h1>
+  <div class="links1">
+    <div class="links">
+      <ul>
+        <li><h2><a href="#">About Us</a></h2></li>
+        <li><h2><a href="#vision">Vision</a></h2></li>
+        <li><h2><a href="#mission">Mission</a></h2></li>
+        <li><h2><a href="#">Contact Us</a></h2></li>
+        <li><h2><a href="#">Rules and Regulations</a></h2></li>
+      </ul>
+      <ul>
+        <li><h2><a href="/circular">Circulars</a></h2></li>
+        <li><h2><a href="#">Resources</a></h2></li>
+        <li><h2><a href="/event_gallery">Gallery</a></h2></li>
+        <li><h2><a href="#faculty-section">Faculties</a></h2></li>
+        <li><h2><a href="/vista" target="_blank">VISTA</a></h2></li>
+      </ul>
+      <ul>
+        <div>
+          <img src="{{ url_for('static', filename='images/nmamit.png') }}" alt="NMAMIT Logo" style="height: 80px; width: 600px">
+        </div>
+        <h2>NMAM Institute of Technology, Nitte, Karkala Taluk,<br>Udupi Dist., Karnataka, India - 574 110</h2>
+        <a href="tel:+91-8258-281039">Tel : +91 8258281039</a><br>
+        <a href="mailto:principal_nmamit@nitte.edu.in">E-mail : principal_nmamit@nitte.edu.in</a>
+      </ul>
+    </div>
+    
+    <div class="wrapper">
+      <a href="#" class="icon facebook" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+      <a href="#" class="icon twitter" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+      <a href="#" class="icon instagram" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+      <a href="#" class="icon github" aria-label="Github"><i class="fab fa-github"></i></a>
+      <a href="#" class="icon youtube" aria-label="Youtube"><i class="fab fa-youtube"></i></a>
+    </div>
+
+    <div class="copy">
+      <p>&copy; 2025 NMAM Institute of Technology. All Rights Reserved.</p>
+    </div>
+  </div>
+  </footer>
+<script>
+  // Get the back-to-top button element
+const backToTopButton = document.getElementById('backToTop');
+
+// Detect scrolling to show/hide the button
+window.addEventListener('scroll', () => {
+    if (window.scrollY > 300) {
+        backToTopButton.classList.add('show');
+        backToTopButton.classList.remove('hide');
+    } else {
+        backToTopButton.classList.remove('show');
+        backToTopButton.classList.add('hide');
+    }
+});
+
+// Optional: Smooth scrolling animation (built-in behavior with "scroll-behavior" in CSS)
+backToTopButton.addEventListener('click', (e) => {
+    e.preventDefault();  // Prevent default link behavior
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'  // Smooth scroll to top
+    });
+});
+
+// Chatbot toggle
+const chatToggle = document.getElementById('chatToggle');
+const chatBox = document.getElementById('chatBox');
+const chatClose = document.getElementById('chatClose');
+const chatInput = document.getElementById('chatInput');
+const chatSend = document.getElementById('chatSend');
+const chatMessages = document.getElementById('chatMessages');
+
+chatToggle.addEventListener('click', () => {
+  chatBox.style.display = chatBox.style.display === 'block' ? 'none' : 'block';
+});
+
+chatClose.addEventListener('click', () => {
+  chatBox.style.display = 'none';
+});
+
+chatSend.addEventListener('click', () => {
+  const message = chatInput.value.trim();
+  if (message) {
+    const userMsg = document.createElement('div');
+    userMsg.className = 'user-message';
+    userMsg.textContent = message;
+    chatMessages.appendChild(userMsg);
+
+    // Dummy bot response (can integrate OpenAI or Flask API here)
+    const botMsg = document.createElement('div');
+    botMsg.className = 'bot-message';
+    botMsg.textContent = "Thanks for your question! We'll get back to you soon.";
+    chatMessages.appendChild(botMsg);
+
+    chatInput.value = '';
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+  }
+});
+
+  function scrollCards(direction) {
+    const container = document.getElementById('scroll-container');
+    const scrollAmount = 250; // pixels per click
+
+    container.scrollBy({
+      left: direction * scrollAmount,
+      behavior: 'smooth'
+    });
+  }
+
+</script>
+</body>
+</html>

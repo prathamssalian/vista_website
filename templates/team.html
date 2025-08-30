@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>VISTA Core Team</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Orbitron', sans-serif;
+      background-color: #0a0a0a;
+      color: #fff;
+    }
+
+    header {
+      background-color: #111;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 4px 10px rgba(0,255,204,0.2);
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+      color: #00ffcc;
+      text-shadow: 0 0 5px #00ffcc;
+    }
+
+    /* Toggle buttons */
+    .toggle-buttons {
+      text-align: center;
+      margin: 20px 0;
+    }
+    .toggle-buttons button {
+      background: transparent;
+      border: 2px solid #00ffcc;
+      color: #00ffcc;
+      padding: 10px 20px;
+      margin: 0 10px;
+      border-radius: 8px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .toggle-buttons button.active,
+    .toggle-buttons button:hover {
+      background: #00ffcc;
+      color: #111;
+      box-shadow: 0 0 10px #00ffcc;
+    }
+
+    /* Sections */
+    .section {
+      padding: 40px 30px;
+      display: none; /* hidden by default */
+    }
+    .section.active {
+      display: block;
+    }
+
+    /* Collapsible subsections */
+    details {
+      margin-bottom: 20px;
+      border: 1px solid #00ffcc33;
+      border-radius: 10px;
+      padding: 10px;
+      background: #111;
+      transition: 0.3s;
+    }
+    details summary {
+      font-size: 1.2rem;
+      color: #00ffcc;
+      cursor: pointer;
+      outline: none;
+    }
+    details[open] {
+      box-shadow: 0 0 10px #00ffcc55;
+    }
+    
+    h2 {
+      color: #00ffcc;
+      border-left: 5px solid #00ffcc;
+      margin-bottom: 20px;
+    }
+
+    /* Grid */
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+      margin-top: 15px;
+    }
+    @media (max-width: 900px) {
+      .team-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 600px) {
+      .team-grid { grid-template-columns: 1fr; }
+    }
+
+    .team-card {
+      background: #1a1a1a;
+      border: 1px solid #00ffcc33;
+      padding: 10px;
+      border-radius: 15px;
+      text-align: center;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .team-card:hover {
+      transform: scale(1.03);
+      box-shadow: 0 0 15px #00ffcc55;
+    }
+
+    .team-card img {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      border: 2px solid #00ffcc;
+      object-fit: cover;
+      margin-bottom: 5px;
+    }
+
+    .team-card h3 {
+      color: #00ffcc;
+      margin: 10px 0 5px;
+    }
+
+    .team-card p {
+      font-size: 1rem;
+      color: #ccc;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      font-size: 0.8rem;
+      color: #666;
+    }
+
+            :root{
+    --neon: #00eaff;      /* <<< your neon color */
+    --ring-size: 28px;    /* outer ring diameter */
+    --dot-size: 8px;      /* center dot diameter */
+    --trail: 0.18s;       /* ring catch-up feel (css for click pulse) */
+  }
+
+  .card{
+    max-width: 720px;
+    padding: 28px 30px;
+    border-radius: 22px;
+    backdrop-filter: blur(8px) saturate(130%);
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    box-shadow: 0 10px 40px rgba(0,0,0,0.45), 0 0 80px rgba(0, 234, 255, 0.08);
+  }
+  h1{margin:0 0 8px;font-size: clamp(24px, 5vw, 38px);}
+  p{opacity:.8;line-height:1.6}
+
+  /* Hide the native cursor */
+  html, body, * { cursor: none !important; }
+
+  /* Cursor elements */
+  .cursor {
+    position: fixed;
+    top: 0; left: 0;
+    width: var(--ring-size);
+    height: var(--ring-size);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    /* Glow ring */
+    box-shadow:
+      0 0 6px var(--neon),
+      0 0 16px var(--neon),
+      0 0 34px var(--neon);
+    border: 2px solid color-mix(in oklab, var(--neon) 75%, white 25%);
+    background: radial-gradient(circle at center,
+      color-mix(in oklab, var(--neon) 30%, transparent 70%) 0%,
+      transparent 55%);
+    mix-blend-mode: screen;
+  }
+
+  .cursor-dot {
+    position: fixed;
+    top: 0; left: 0;
+    width: var(--dot-size);
+    height: var(--dot-size);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 10000;
+    transform: translate(-50%, -50%);
+    background: var(--neon);
+    box-shadow:
+      0 0 6px var(--neon),
+      0 0 14px var(--neon),
+      0 0 22px var(--neon);
+  }
+
+  /* Click pulse effect on the ring */
+  .cursor.pulse {
+    animation: clickPulse var(--trail) ease-out;
+  }
+  @keyframes clickPulse{
+    0%   { transform: translate(-50%, -50%) scale(1);     opacity: 1; }
+    50%  { transform: translate(-50%, -50%) scale(1.25);  opacity: .9; }
+    100% { transform: translate(-50%, -50%) scale(1);     opacity: 1; }
+  }
+
+  /* Accessibility: if user prefers reduced motion, snap to cursor */
+  @media (prefers-reduced-motion: reduce) {
+    .cursor, .cursor-dot { transition: none !important; }
+  }
+
+  /* Optional: hide on touch devices (you can remove this if you still want it visible) */
+  @media (hover: none) and (pointer: coarse) {
+    html, body, * { cursor: auto !important; }
+    .cursor, .cursor-dot { display: none; }
+  }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>VISTA Core Team - Dept. of ISE</h1>
+  </header>
+
+  <!-- Toggle Buttons -->
+  <div class="toggle-buttons">
+    <button class="active" onclick="showSection('core')">Core Team</button>
+    <button onclick="showSection('faculty')">Faculty</button>
+    <button onclick="showSection('dev')">Development Team</button>
+  </div>
+
+  <!-- Core Team Section (merged with collapsible subsections) -->
+  <section id="core" class="section active">
+    
+    <details open>
+      <summary>Executive Committee</summary>
+      <div class="team-grid">
+        <div class="team-card">
+          <img src="{{ url_for('static', filename='images/preethi.jpg') }}">
+          <h3>President</h3>
+          <p>DARSHAN</p>
+        </div>
+        <div class="team-card">
+          <img src="{{ url_for('static', filename='images/team/em_head.jpg') }}">
+          <h3>Branch Captain</h3>
+          <p>SRINIDHI</p>
+        </div>
+        <!-- add other executive members here -->
+      </div>
+    </details>
+
+    <details>
+      <summary>Event Management Team</summary>
+      <div class="team-grid">
+        <!-- event members -->
+      </div>
+    </details>
+
+    <details>
+      <summary>Technical Team</summary>
+      <div class="team-grid">
+        <!-- technical members -->
+      </div>
+    </details>
+
+    <details>
+      <summary>Social Media Team</summary>
+      <div class="team-grid">
+        <!-- social media members -->
+      </div>
+    </details>
+
+    <details>
+      <summary>Publicity Team</summary>
+      <div class="team-grid">
+        <!-- publicity members -->
+      </div>
+    </details>
+
+    <details>
+      <summary>Magazine Team</summary>
+      <div class="team-grid">
+        <!-- magazine members -->
+      </div>
+    </details>
+
+    <details>
+      <summary>Cultural Team</summary>
+      <div class="team-grid">
+        <!-- cultural members -->
+      </div>
+    </details>
+
+    <details>
+      <summary>Sports Team</summary>
+      <div class="team-grid">
+        <!-- sports members -->
+      </div>
+    </details>
+
+    <details>
+      <summary>Outreach Team</summary>
+      <div class="team-grid">
+        <!-- outreach members -->
+      </div>
+    </details>
+
+  </section>
+
+  <!-- Faculty Section -->
+  <section id="faculty" class="section">
+    <h2>Faculty Advisors</h2>
+    <div class="team-grid">
+      <div class="team-card">
+        <img src="{{ url_for('static', filename='images/preethi.jpg') }}">
+        <h3>Prof. Preethi Salian</h3>
+        <p>Faculty Advisor</p>
+      </div>
+      <!-- other faculty -->
+    </div>
+  </section>
+
+  <!-- Development Team Section -->
+  <section id="dev" class="section">
+    <h2>Development Team</h2>
+    <div class="team-grid">
+      <div class="team-card">
+        <img src="{{ url_for('static', filename='images/pratham.jpg') }}">
+        <h3>Pratham S Salian</h3>
+        <p>Full-Stack Developer</p>
+      </div>
+      <!-- other dev team -->
+    </div>
+  </section>
+
+    <div class="cursor" id="cursor"></div>
+  <div class="cursor-dot" id="cursorDot"></div>
+
+  <footer>
+    &copy; 2025 VISTA Club | Department of Information Science & Engineering
+  </footer>
+
+  <script>
+    function showSection(sectionId) {
+      document.querySelectorAll('.section').forEach(sec => sec.classList.remove('active'));
+      document.getElementById(sectionId).classList.add('active');
+
+      document.querySelectorAll('.toggle-buttons button').forEach(btn => btn.classList.remove('active'));
+      event.target.classList.add('active');
+    }
+
+             (() => {
+  const ring = document.getElementById('cursor');
+  const dot  = document.getElementById('cursorDot');
+
+  // Position state
+  let mouseX = window.innerWidth / 2;
+  let mouseY = window.innerHeight / 2;
+  let ringX = mouseX;
+  let ringY = mouseY;
+
+  // Smoothness (0..1) — lower = more floaty/inertial
+  const easing = 0.18;
+
+  // Update target on mouse move
+  window.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+    dot.style.transform = `translate(${mouseX - 0.5*parseFloat(getComputedStyle(dot).width)}px, ${mouseY - 0.5*parseFloat(getComputedStyle(dot).height)}px)`;
+  }, { passive: true });
+
+  // Pulse on click
+  window.addEventListener('mousedown', () => {
+    ring.classList.remove('pulse');
+    // Force reflow to restart animation
+    void ring.offsetWidth;
+    ring.classList.add('pulse');
+  });
+
+  // Animation loop for smooth ring follow
+  function animate() {
+    const dx = mouseX - ringX;
+    const dy = mouseY - ringY;
+    ringX += dx * easing;
+    ringY += dy * easing;
+    ring.style.transform = `translate(${ringX - 0.5*parseFloat(getComputedStyle(ring).width)}px, ${ringY - 0.5*parseFloat(getComputedStyle(ring).height)}px)`;
+    requestAnimationFrame(animate);
+  }
+  animate();
+
+  // Keep inside viewport on resize
+  window.addEventListener('resize', () => {
+    mouseX = Math.min(Math.max(mouseX, 0), window.innerWidth);
+    mouseY = Math.min(Math.max(mouseY, 0), window.innerHeight);
+  });
+
+  // Optional: make ring slightly larger when hovering clickable elements
+  const hoverables = ['a','button','input','textarea','select','[role="button"]','[data-hover]'];
+  document.addEventListener('mouseover', (e) => {
+    if (hoverables.some(sel => e.target.closest(sel))) {
+      ring.style.transition = 'transform 120ms ease';
+      ring.style.transform += ' scale(1.2)';
+    }
+  });
+  document.addEventListener('mouseout', (e) => {
+    if (hoverables.some(sel => e.target.closest(sel))) {
+      // remove the extra scale; position transform is reapplied in the next frame
+    }
+  });
+})();
+
+  </script>
+
+</body>
+</html>

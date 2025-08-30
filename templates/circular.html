@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Circulars | Department Website</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f5f7fa;
+    }
+
+    header {
+      background-color: #003366;
+      color: white;
+      padding: 20px;
+      text-align: center;
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    .circular-container {
+      max-width: 1000px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+    .circular-card {
+      background-color: #fff;
+      border-left: 6px solid #003366;
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      transition: 0.3s ease;
+    }
+
+    .circular-card:hover {
+      transform: translateY(-4px);
+    }
+
+    .circular-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: #003366;
+      margin-bottom: 8px;
+    }
+
+    .circular-date {
+      font-size: 13px;
+      color: #888;
+      margin-bottom: 10px;
+    }
+
+    .circular-description {
+      font-size: 15px;
+      color: #333;
+      line-height: 1.5;
+    }
+
+    .circular-link {
+      display: inline-block;
+      margin-top: 12px;
+      color: #0055aa;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .circular-link:hover {
+      text-decoration: underline;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background-color: #003366;
+      color: white;
+      margin-top: 40px;
+    }
+
+    .back-button {
+      display: inline-block;
+      margin-top: 10px;
+      background-color: #0055aa;
+      color: white;
+      padding: 8px 16px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: 500;
+      transition: background-color 0.3s;
+    }
+
+    .back-button:hover {
+      background-color: #0077cc;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <i class="fas fa-bullhorn"></i> Department Circulars
+  </header>
+
+  <div class="circular-container">
+    <div class="circular-card">
+      <div class="circular-title">Internship Guidelines Released</div>
+      <div class="circular-date">June 10, 2025</div>
+      <div class="circular-description">
+        The department has issued new internship guidelines for 2nd and 3rd year students. Students are requested to follow the updated format.
+      </div>
+      <a href="/static/docs/internship_guidelines.pdf" class="circular-link" target="_blank"><i class="fas fa-file-pdf"></i> View Document</a>
+    </div>
+
+    <div class="circular-card">
+      <div class="circular-title">Mid-Semester Exam Schedule</div>
+      <div class="circular-date">June 5, 2025</div>
+      <div class="circular-description">
+        The mid-semester exam timetable for all semesters has been published. Students are required to check the schedule and prepare accordingly.
+      </div>
+      <a href="/static/docs/midsem_schedule.pdf" class="circular-link" target="_blank"><i class="fas fa-file-alt"></i> Download Timetable</a>
+    </div>
+
+    <div class="circular-card">
+      <div class="circular-title">Vista Club Tech Talk Registration</div>
+      <div class="circular-date">May 29, 2025</div>
+      <div class="circular-description">
+        Registrations are open for the upcoming Tech Talk event organized by Vista Club. Limited seats available.
+      </div>
+      <a href="https://example.com/tech-talk-registration" class="circular-link" target="_blank"><i class="fas fa-external-link-alt"></i> Register Now</a>
+    </div>
+  </div>
+
+  <footer>
+    &copy; 2025 Department of Information Science & Engineering<br>
+    <a href="/" class="back-button"><i class="fas fa-arrow-left"></i> Back to Home</a>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Past Events | ISE Dept</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Orbitron', sans-serif;
+      background: linear-gradient(135deg, #0f0f0f, #1a1a2e);
+      color: #ffffff;
+    }
+
+    header {
+      background: rgba(10, 46, 92, 0.3);
+      padding: 20px;
+      text-align: center;
+      border-bottom: 2px solid #00ffff;
+      box-shadow: 0 0 15px #00ffff;
+      backdrop-filter: blur(10px);
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+      color: #00ffff;
+      text-shadow: 0 0 8px #00ffff;
+    }
+
+    .events-section {
+      padding: 60px 20px;
+    }
+
+    .events-section h2 {
+      font-size: 2.2rem;
+      margin-bottom: 30px;
+      color: #f4ce14;
+      text-align: center;
+      text-shadow: 0 0 6px #f4ce14;
+    }
+
+    .event-container {
+      display: flex;
+      gap: 30px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .event-card {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 20px;
+      box-shadow: 0 8px 25px rgba(0, 255, 255, 0.2);
+      width: 300px;
+      padding: 20px;
+      text-align: center;
+      backdrop-filter: blur(15px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      transition: transform 0.3s ease;
+    }
+
+    .event-card:hover {
+      transform: scale(1.03);
+      box-shadow: 0 0 20px #00ffff;
+    }
+
+    .event-card img {
+      width: 100%;
+      border-radius: 15px;
+      height: 180px;
+      object-fit: cover;
+      margin-bottom: 15px;
+    }
+
+    .event-card h3 {
+      font-size: 1.3rem;
+      margin: 10px 0;
+      color: #00ffff;
+      text-shadow: 0 0 4px #00ffff;
+    }
+
+    .event-card p {
+      font-size: 0.95rem;
+      margin-bottom: 12px;
+      color: #ddd;
+    }
+
+    .event-date {
+      font-weight: bold;
+      color: #f4ce14;
+      text-shadow: 0 0 4px #f4ce14;
+    }
+
+    .gallery-btn {
+      padding: 8px 16px;
+      border: 2px solid #f4ce14;
+      background: transparent;
+      border-radius: 30px;
+      font-size: 0.9rem;
+      color: #f4ce14;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .gallery-btn:hover {
+      background-color: #f4ce14;
+      color: #000;
+    }
+
+    /* POPUP GALLERY */
+    .popup {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.95);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 999;
+      flex-direction: column;
+      overflow-y: auto;
+      padding: 40px 20px;
+    }
+
+    .popup-gallery {
+      display: flex;
+      margin-top: auto;
+      flex-wrap: wrap;
+      gap: 30px;
+      justify-content: center;
+      max-width: 1000px;
+    }
+
+    .popup-gallery img {
+      width: 300px; /* Reduce size slightly for better alignment */
+      height: auto;
+      border-radius: 12px;
+      box-shadow: 0 0 12px #00ffff;
+      transition: 0.3s;
+      object-fit: cover;
+    }
+
+    .popup-gallery img:hover {
+      transform: scale(1.05);
+    }
+
+    .close-icon {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      font-size: 36px;
+      color: #f4ce14;
+      cursor: pointer;
+      text-shadow: 0 0 10px #f4ce14;
+      z-index: 1000;
+      transition: 0.3s;
+    }
+
+    .close-icon:hover {
+      color: #ffffff;
+      text-shadow: 0 0 15px #ffffff;
+    }
+
+    footer {
+      background-color: rgba(10, 46, 92, 0.3);
+      color: #fff;
+      text-align: center;
+      padding: 20px;
+      margin-top: 50px;
+      border-top: 2px solid #00ffff;
+      box-shadow: 0 0 15px #00ffff;
+      backdrop-filter: blur(10px);
+    }
+
+    .popup-overlay {
+  position: fixed;
+  display: none;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.9);
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+/* Inner popup box */
+.popup-content {
+  background: #121212;
+  padding: 20px;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 900px;
+  max-height: 90vh;
+  overflow: hidden;
+  color: white;
+  position: relative;
+  box-shadow: 0 0 20px cyan;
+}
+
+/* Scrollable grid */
+.gallery-scroll {
+  max-height: 70vh;
+  overflow-y: auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 10px;
+}
+
+.gallery-scroll img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
+
+/* Close button */
+.close-btn {
+  position: absolute;
+  top: 5px;
+  right: 3px;
+  font-size: 32px;
+  color: #f00;
+  cursor: pointer;
+}
+
+.large-image-popup {
+  display: none;
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background-color: rgba(0,0,0,0.95);
+  justify-content: center;
+  align-items: center;
+  z-index: 1100;
+}
+
+.large-image-popup img {
+  max-width: 80%;
+  max-height: 80%;
+  border-radius: 10px;
+  border: 4px solid #00ffff;
+}
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Past Events</h1>
+</header>
+
+<section class="events-section">
+  <h2>Highlights & Memories</h2>
+
+  <div class="event-container">
+    <div class="event-card">
+      <img src="https://via.placeholder.com/300x180?text=TechFusion+2024" alt="TechFusion">
+      <h3>TechFusion 2024</h3>
+      <p class="event-date">10th Jan 2024</p>
+      <p>Annual fest with coding events & tech exhibits.</p>
+      <button class="gallery-btn" onclick="openGallery('event1')">View Gallery</button>
+    </div>
+
+    <div class="event-card">
+      <img src="https://via.placeholder.com/300x180?text=Cyber+Workshop" alt="Cyber Workshop">
+      <h3>Cyber Security Workshop</h3>
+      <p class="event-date">5th Feb 2024</p>
+      <p>Hands-on session on ethical hacking & tools.</p>
+      <button class="gallery-btn" onclick="openGallery('event2')">View Gallery</button>
+    </div>
+  </div>
+</section>
+
+<!-- POPUP -->
+<div id="galleryPopup" class="popup">
+  <div class="popup-content">
+    <span class="close-btn" onclick="closeGallery()">&times;</span>
+    <div class="gallery-scroll">
+      <!-- Clickable images -->
+      <img src="/static/images/devidas.jpg" alt="Image 1" onclick="showLarge(this)">
+      <!-- Add more images -->
+      <img src="/static/images/devidas.jpg" alt="Image 1" onclick="showLarge(this)">
+      <img src="/static/images/devidas.jpg" alt="Image 1" onclick="showLarge(this)">
+      <img src="/static/images/devidas.jpg" alt="Image 1" onclick="showLarge(this)">
+      <img src="/static/images/devidas.jpg" alt="Image 1" onclick="showLarge(this)">
+      <img src="/static/images/devidas.jpg" alt="Image 1" onclick="showLarge(this)">
+      <img src="/static/images/devidas.jpg" alt="Image 1" onclick="showLarge(this)">
+      <img src="/static/images/devidas.jpg" alt="Image 1" onclick="showLarge(this)">
+      <img src="/static/images/devidas.jpg" alt="Image 1" onclick="showLarge(this)">
+      <img src="/static/images/devidas.jpg" alt="Image 1" onclick="showLarge(this)">
+    </div>
+  </div>
+</div>
+
+<div id="largeImageViewer" class="large-image-popup" onclick="closeLargeImage()">
+  <img id="largeImage" src="" alt="Large View">
+</div>
+
+<footer>
+  &copy; 2025 Department of Information Science & Engineering | NMAMIT
+</footer>
+
+<script>
+  function openGallery() {
+    document.getElementById("galleryPopup").style.display = "flex";
+  }
+
+  function closeGallery() {
+    document.getElementById("galleryPopup").style.display = "none";
+  }
+
+  function showLarge(imgElement) {
+    const largeViewer = document.getElementById("largeImageViewer");
+    const largeImg = document.getElementById("largeImage");
+    largeImg.src = imgElement.src;
+    largeViewer.style.display = "flex";
+  }
+
+  function closeLargeImage() {
+    document.getElementById("largeImageViewer").style.display = "none";
+  }
+</script>
+
+
+</body>
+</html>

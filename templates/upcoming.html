@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Upcoming Events | ISE Dept</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Orbitron', sans-serif;
+      background: linear-gradient(135deg, #0f0f0f, #1a1a2e);
+      color: #ffffff;
+      overflow-x: hidden;
+    }
+
+    header {
+      background: linear-gradient(135deg, #0f0f0f, #1a1a2e);
+      padding: 20px;
+      text-align: center;
+      backdrop-filter: blur(10px);
+      border-bottom: 2px solid #00ffff;
+      box-shadow: 0 0 15px #00ffff;
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+      color: #00ffff;
+      text-shadow: 0 0 8px #00ffff;
+    }
+
+    .events-section {
+      padding: 60px 20px;
+    }
+
+    .events-section h2 {
+      font-size: 2.2rem;
+      margin-bottom: 30px;
+      color: #f4ce14;
+      text-align: center;
+      text-shadow: 0 0 6px #f4ce14;
+    }
+
+    .event-container {
+      display: flex;
+      overflow-x: auto;
+      gap: 30px;
+      padding: 20px 10px;
+      scroll-behavior: smooth;
+    }
+
+    .event-container::-webkit-scrollbar {
+      height: 10px;
+    }
+
+    .event-container::-webkit-scrollbar-thumb {
+      background: #00ffff;
+      border-radius: 5px;
+    }
+
+    .event-container::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    .event-card {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 20px;
+      box-shadow: 0 8px 25px rgba(0, 255, 255, 0.2);
+      min-width: 280px;
+      max-width: 300px;
+      flex-shrink: 0;
+      padding: 20px;
+      text-align: center;
+      backdrop-filter: blur(15px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      opacity: 0;
+      transform: translateX(100px);
+      transition: all 0.6s ease;
+    }
+
+    .event-card.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .event-card:hover {
+      box-shadow: 0 0 20px #00ffff;
+    }
+
+    .event-card img {
+      width: 100%;
+      border-radius: 15px;
+      height: 180px;
+      object-fit: cover;
+      margin-bottom: 15px;
+    }
+
+    .event-card h3 {
+      font-size: 1.3rem;
+      margin: 10px 0;
+      color: #00ffff;
+      text-shadow: 0 0 4px #00ffff;
+    }
+
+    .event-card p {
+      font-size: 0.95rem;
+      margin-bottom: 12px;
+      color: #ddd;
+    }
+
+    .event-date {
+      font-weight: bold;
+      color: #f4ce14;
+      text-shadow: 0 0 4px #f4ce14;
+    }
+
+    .rsvp-btn {
+      padding: 10px 20px;
+      font-size: 0.9rem;
+      color: #000;
+      border: none;
+      border-radius: 25px;
+      background: #f4ce14;
+      cursor: pointer;
+      transition: 0.3s;
+      font-weight: bold;
+    }
+
+    .rsvp-btn:hover {
+      background-color: #fff700;
+      color: #000;
+    }
+
+    footer {
+      background-color: rgba(10, 46, 92, 0.3);
+      color: #fff;
+      text-align: center;
+      padding: 20px;
+      margin-top: 50px;
+      border-top: 2px solid #00ffff;
+      box-shadow: 0 0 15px #00ffff;
+      backdrop-filter: blur(10px);
+    }
+
+    /* Modal Styles */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(4px);
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-content {
+      background: rgba(0, 255, 255, 0.08);
+      border: 1px solid #00ffff;
+      padding: 30px;
+      border-radius: 20px;
+      width: 90%;
+      max-width: 400px;
+      color: #fff;
+      box-shadow: 0 0 20px #00ffff;
+      position: relative;
+    }
+
+    .modal-content h3 {
+      margin-bottom: 15px;
+      color: #f4ce14;
+    }
+
+    .modal-content input {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border-radius: 10px;
+      border: none;
+      outline: none;
+      font-family: 'Orbitron', sans-serif;
+    }
+
+    .modal-content button {
+      background: #f4ce14;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 10px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 1.5rem;
+      color: #f4ce14;
+      cursor: pointer;
+    }
+
+    .toast {
+  visibility: hidden;
+  min-width: 250px;
+  background-color: #00ffaa;
+  color: black;
+  text-align: center;
+  border-radius: 8px;
+  padding: 16px;
+  position: fixed;
+  z-index: 2000;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-weight: bold;
+  box-shadow: 0 0 10px #00ffff;
+}
+
+.toast.show {
+  visibility: visible;
+  animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+@keyframes fadein {
+  from { bottom: 20px; opacity: 0; }
+  to   { bottom: 30px; opacity: 1; }
+}
+
+@keyframes fadeout {
+  from { bottom: 30px; opacity: 1; }
+  to   { bottom: 40px; opacity: 0; }
+}
+
+.registered-section {
+  padding: 40px 20px 10px;
+  background: linear-gradient(135deg, #0f0f0f, #1a1a2e);
+}
+
+.registered-heading {
+  font-size: 2rem;
+  color: #f4ce14;
+      text-align: center;
+      text-shadow: 0 0 6px #f4ce14;
+  margin-bottom: 25px;
+}
+
+.registered-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+  padding: 0 10px;
+}
+
+.registered-card {
+  background: rgba(0, 255, 255, 0.06);
+  border: 1px solid #00ffaa44;
+  border-radius: 20px;
+  box-shadow: 0 0 15px #00ffaa44;
+  padding: 20px;
+  width: 280px;
+  text-align: center;
+  backdrop-filter: blur(10px);
+}
+
+.registered-card h3 {
+  font-size: 1.2rem;
+  margin-bottom: 8px;
+  color: #00ffff;
+}
+
+.registered-card p {
+  font-size: 0.9rem;
+  color: #ccc;
+}
+
+
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Upcoming Events</h1>
+</header>
+
+  <section class="registered-section" id="registered-section" style="display: none;">
+  <h2 class="registered-heading">Registered Events</h2>
+  <div class="registered-container" id="registered-container">
+    <!-- Registered event cards will be inserted here -->
+  </div>
+</section>
+<section class="events-section">
+  <h2>What's Happening</h2>
+  <div class="event-container">
+    
+    <div class="event-card">
+      <img src="https://via.placeholder.com/300x180" alt="Event Image">
+      <h3>AI Hackathon 2025</h3>
+      <p class="event-date">Date: 25th June 2025</p>
+      <p>24 hours of innovation and AI challenges. Open to all students.</p>
+      <button class="rsvp-btn">RSVP</button>
+
+    </div>
+
+    <div class="event-card">
+      <img src="https://via.placeholder.com/300x180" alt="Event Image">
+      <h3>TechTalk: Blockchain</h3>
+      <p class="event-date">Date: 1st July 2025</p>
+      <p>Lecture on blockchain trends, impact, and real use cases.</p>
+      <button class="rsvp-btn">RSVP</button>
+
+    </div>
+
+    <div class="event-card">
+      <img src="https://via.placeholder.com/300x180" alt="Event Image">
+      <h3>Women in Tech Panel</h3>
+      <p class="event-date">Date: 10th July 2025</p>
+      <p>Celebrating women innovators with Q&A and networking sessions.</p>
+      <button class="rsvp-btn">RSVP</button>
+
+    </div>
+
+    <div class="event-card">
+      <img src="https://via.placeholder.com/300x180" alt="Event Image">
+      <h3>Internship Fair</h3>
+      <p class="event-date">Date: 15th July 2025</p>
+      <p>Meet recruiters and apply for internships in startups and MNCs.</p>
+      <button class="rsvp-btn">RSVP</button>
+
+    </div>
+
+  </div>
+</section>
+<div id="toast" class="toast"></div>
+
+
+
+<!-- RSVP Modal -->
+<div class="modal" id="rsvp-modal">
+  <div class="modal-content">
+    <span class="close-btn" id="close-modal">&times;</span>
+    <h3>RSVP to Event</h3>
+    <input type="text" id="rsvp-name" placeholder="Your Name" required />
+    <input type="email" id="rsvp-email" placeholder="Your college Email" required />
+    <button onclick="submitRSVP()">Submit</button>
+  </div>
+</div>
+
+<!-- Toast Notification -->
+<div id="toast" class="toast">Thank you for registering!</div>
+
+<footer>
+  &copy; 2025 Department of Information Science & Engineering | NMAMIT
+</footer>
+
+
+<script>
+  const cards = document.querySelectorAll(".event-card");
+  const observer = new IntersectionObserver(
+    entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+        }
+      });
+    },
+    { threshold: 0.2 }
+  );
+  cards.forEach(card => observer.observe(card));
+
+  let selectedRSVPBtn = null;
+  const modal = document.getElementById("rsvp-modal");
+  const rsvpButtons = document.querySelectorAll(".rsvp-btn");
+  const closeBtn = document.getElementById("close-modal");
+
+  rsvpButtons.forEach(btn => {
+    btn.addEventListener("click", (e) => {
+      checkRSVP(e);
+    });
+  });
+
+  function checkRSVP(event) {
+    fetch("/rsvp-check")
+      .then(response => response.json())
+      .then(data => {
+        if (data.status === 'ok') {
+          selectedRSVPBtn = event.target;
+          modal.style.display = "flex";
+        } else {
+          showToast("🔒 Please login before registering!");
+        }
+      })
+      .catch(error => console.error("RSVP check failed:", error));
+  }
+
+  closeBtn.onclick = () => modal.style.display = "none";
+  window.onclick = e => { if (e.target === modal) modal.style.display = "none"; };
+
+  function submitRSVP() {
+    const name = document.getElementById("rsvp-name").value.trim();
+    const email = document.getElementById("rsvp-email").value.trim();
+
+    if (!name || !email) {
+      showToast("Please fill out all fields.");
+      return;
+    }
+
+    if (selectedRSVPBtn) {
+      const eventCard = selectedRSVPBtn.closest(".event-card");
+      const title = eventCard.querySelector("h3").textContent;
+
+      fetch('/rsvp-submit', {   // ⬅️ store in DB
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name: name, email: email, event_title: title })
+      })
+      .then(res => res.json())
+      .then(data => {
+        if (data.status === 'success') {
+          selectedRSVPBtn.textContent = "Registered";
+          selectedRSVPBtn.disabled = true;
+          selectedRSVPBtn.style.background = "#00ffaa";
+          selectedRSVPBtn.style.color = "#000";
+          showToast("✅ Thank you for registering!");
+          addToRegistered(title, eventCard);  // ⬅️ call updated function
+          modal.style.display = "none";
+        } else {
+          showToast("❌ Registration failed.");
+        }
+      });
+    }
+  }
+
+  function addToRegistered(title, eventCard) {
+    const date = eventCard.querySelector(".event-date").textContent;
+    const desc = eventCard.querySelector("p:nth-of-type(2)").textContent;
+
+    const container = document.getElementById("registered-container");
+    const section = document.getElementById("registered-section");
+    section.style.display = "block";
+
+    const newCard = document.createElement("div");
+    newCard.className = "registered-card";
+    newCard.innerHTML = `<h3>${title}</h3><p>${date}</p><p>${desc}</p>`;
+    container.appendChild(newCard);
+  }
+
+  function showToast(message) {
+    const toast = document.getElementById("toast");
+    toast.textContent = message;
+    toast.classList.add("show");
+    setTimeout(() => toast.classList.remove("show"), 3000);
+  }
+
+  // ⬅️ Load registered events on page load
+  window.onload = () => {
+    fetch("/get-registered-events")
+      .then(res => res.json())
+      .then(data => {
+        if (data.status === "success") {
+          if (data.events.length > 0) {
+            const container = document.getElementById("registered-container");
+            const section = document.getElementById("registered-section");
+            section.style.display = "block";
+            data.events.forEach(ev => {
+              const newCard = document.createElement("div");
+              newCard.className = "registered-card";
+              newCard.innerHTML = `<h3>${ev.name}</h3><p>${ev.date}</p><p>${ev.description}</p>`;
+              container.appendChild(newCard);
+
+              // Disable RSVP button for already registered
+              document.querySelectorAll(".event-card").forEach(card => {
+                if (card.querySelector("h3").textContent === ev.name) {
+                  const btn = card.querySelector(".rsvp-btn");
+                  btn.textContent = "Registered";
+                  btn.disabled = true;
+                  btn.style.background = "#00ffaa";
+                  btn.style.color = "#000";
+                }
+              });
+            });
+          }
+        }
+      });
+  }
+
+  async function loadRegisteredEvents() {
+    try {
+        const response = await fetch('/my-registered-events');
+        const data = await response.json();
+
+        const section = document.getElementById('registered-section');
+        const container = document.getElementById('registered-container');
+        container.innerHTML = ''; // Clear old cards
+
+        if (data.status === 'success' && data.events.length > 0) {
+            section.style.display = 'block'; // show the section
+
+            data.events.forEach(ev => {
+                const card = document.createElement('div');
+                card.className = 'registered-card';
+                card.innerHTML = `
+                    <h3>${ev.event_title}</h3>
+                    <p>Registered on: ${new Date(ev.date).toLocaleString()}</p>
+                    <h4>Date : ${ev.event_date}</h4>
+                    <p>Venue : ${ev.venue}</p>
+                `;
+                container.appendChild(card);
+            });
+        } else {
+            section.style.display = 'none'; // hide if no events
+        }
+    } catch (err) {
+        console.error('Error loading events:', err);
+    }
+}
+
+// Call when page loads
+window.addEventListener('DOMContentLoaded', loadRegisteredEvents);
+</script>
+
+
+</body>
+</html>

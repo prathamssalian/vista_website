@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>{{ event.title }} - Gallery</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    body { font-family: 'Segoe UI', sans-serif; margin: 0; background: #f0f4f8; }
+    header { background: #003366; padding: 16px; color: white; text-align: center; font-size: 22px; }
+    .event-info { text-align: center; margin: 20px; }
+    .event-info h2 { margin: 10px 0; color: #003366; }
+    .event-info p { color: #555; }
+    .event-gallery { max-width: 1000px; margin: 20px auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; }
+    .event-gallery img { width: 100%; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+    .back-button { display: block; margin: 20px auto; background: #0055aa; color: white; padding: 8px 16px; border-radius: 6px; text-decoration: none; text-align: center; width: 150px; }
+    .back-button:hover { background: #0077cc; }
+  </style>
+</head>
+<body>
+
+  <header>
+    <i class="fas fa-image"></i> {{ event.title }}
+  </header>
+
+  <div class="event-info">
+    <h2>{{ event.title }}</h2>
+    <p><b>Date:</b> {{ event.date }}</p>
+    <p>{{ event.description }}</p>
+  </div>
+
+  <div class="event-gallery">
+    {% for img in event.images %}
+    <img src="{{ url_for('static', filename=img) }}" alt="{{ event.title }}">
+    {% endfor %}
+  </div>
+
+  <a href="{{ url_for('gallery') }}" class="back-button"><i class="fas fa-arrow-left"></i> Back to Gallery</a>
+
+</body>
+</html>

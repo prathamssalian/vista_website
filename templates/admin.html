@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Admin Dashboard</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    body { font-family: 'Segoe UI', sans-serif; margin: 0; background: #f9f9f9; }
+    header { background: #003366; color: white; padding: 16px; text-align: center; font-size: 22px; }
+    .container { max-width: 800px; margin: 20px auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+    label { display: block; margin-top: 10px; font-weight: bold; }
+    input, textarea { width: 100%; padding: 8px; margin-top: 5px; border: 1px solid #ccc; border-radius: 6px; }
+    input[type="file"] { padding: 4px; }
+    button { margin-top: 15px; padding: 10px 16px; border: none; background: #0055aa; color: white; font-weight: bold; border-radius: 6px; cursor: pointer; }
+    button:hover { background: #0077cc; }
+    .flash { margin: 10px 0; padding: 10px; border-radius: 6px; }
+    .success { background: #d4edda; color: #155724; }
+    .event-list { margin-top: 20px; }
+    .event-card { border: 1px solid #ddd; padding: 10px; border-radius: 6px; margin-bottom: 10px; }
+    .event-card h3 { margin: 0; color: #003366; }
+  </style>
+</head>
+<body>
+  <header><i class="fas fa-user-cog"></i> Admin Dashboard</header>
+  <div class="container">
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, msg in messages %}
+          <div class="flash {{ category }}">{{ msg }}</div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    <h2>Add New Event</h2>
+    <form action="/admin" method="POST" enctype="multipart/form-data">
+    <label>Event ID (unique, no spaces)</label>
+    <input type="text" name="event_id" required>
+
+    <label>Title</label>
+    <input type="text" name="title" required>
+
+    <label>Date</label>
+    <input type="text" name="date" required>
+
+    <label>Description</label>
+    <textarea name="description"></textarea>
+
+    <label>Cover Image</label>
+    <input type="file" name="cover_image">
+
+    <label>Gallery Images (multiple)</label>
+    <input type="file" name="images" multiple>
+
+    <button type="submit">Add Event</button>
+</form>
+
+
+    <div class="event-list">
+      <h2>Existing Events</h2>
+      {% for e in events %}
+      <div class="event-card">
+        <h3>{{ e.title }}</h3>
+        <p><b>Date:</b> {{ e.date }}</p>
+        <p>{{ e.description }}</p>
+      </div>
+      {% endfor %}
+    </div>
+
+  </div>
+</body>
+</html>

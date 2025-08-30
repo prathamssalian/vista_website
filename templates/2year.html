@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Circulars | Department Website</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f5f7fa;
+    }
+
+    header {
+      background-color: #003366;
+      color: white;
+      padding: 20px;
+      text-align: center;
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    .container {
+      max-width: 1500px;
+      margin: 50px auto;
+      padding: 0 20px;
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 40px;
+    }
+
+    .resource-card {
+      background-color: #ffffff;
+      border-radius: 16px;
+      padding: 30px;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+      width: 85%;
+    }
+
+    .resource-card:hover {
+      transform: translateY(-6px);
+    }
+
+    .resource-card i {
+      font-size: 28px;
+      color: #007BFF;
+      margin-bottom: 10px;
+    }
+
+    .resource-card h3 {
+      margin: 10px 0 6px;
+      font-size: 20px;
+      color: #003366;
+    }
+
+    .resource-card p {
+      font-size: 14px;
+      color: #555;
+      margin-bottom: 10px;
+    }
+
+    .resource-card a {
+      display: inline-block;
+      background-color: #003366;
+      color: #fff;
+      padding: 8px 14px;
+      text-decoration: none;
+      border-radius: 6px;
+      font-size: 14px;
+      transition: background-color 0.3s;
+    }
+
+    .resource-card a:hover {
+      background-color: #00509e;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background-color: #003366;
+      color: white;
+      margin-top: 40px;
+    }
+
+    .back-button {
+      display: inline-block;
+      margin-top: 10px;
+      background-color: #0055aa;
+      color: white;
+      padding: 8px 16px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: 500;
+      transition: background-color 0.3s;
+    }
+
+    .back-button:hover {
+      background-color: #0077cc;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <i class="fas fa-book-reader"></i> 2nd Year Resources - Department of ISE
+  </header>
+
+  <div class="container">
+    <div class="card-grid">
+
+      <div class="resource-card">
+        <i class="fas fa-book"></i>
+        <h3>Syllabus</h3>
+        <p>Detailed syllabus for all 2nd year subjects.</p>
+        <a href="/static/resources/2nd_year/syllabus.pdf" target="_blank">View Syllabus</a>
+      </div>
+
+      <div class="resource-card">
+        <i class="fas fa-calendar-alt"></i>
+        <h3>Timetable</h3>
+        <p>Latest class timetable for 2nd year sections.</p>
+        <a href="/static/resources/2nd_year/timetable.pdf" target="_blank">View Timetable</a>
+      </div>
+
+      <div class="resource-card">
+        <i class="fas fa-flask"></i>
+        <h3>Lab Manuals</h3>
+        <p>Lab instructions and experiment list.</p>
+        <a href="/static/resources/2nd_year/lab_manual.pdf" target="_blank">View Manual</a>
+      </div>
+
+      <div class="resource-card">
+        <i class="fas fa-sticky-note"></i>
+        <h3>Notes</h3>
+        <p>Unit-wise notes from faculty for reference.</p>
+        <a href="/static/resources/2nd_year/notes.pdf" target="_blank">View Notes</a>
+      </div>
+
+      <div class="resource-card">
+        <i class="fas fa-puzzle-piece"></i>
+        <h3>Extra Materials</h3>
+        <p>Additional references, MCQs, and model papers.</p>
+        <a href="/static/resources/2nd_year/extra_material.pdf" target="_blank">Download</a>
+      </div>
+
+    </div>
+
+  <footer>
+    &copy; 2025 Department of Information Science & Engineering<br>
+    <a href="/" class="back-button"><i class="fas fa-arrow-left"></i> Back to Home</a>
+  </footer>
+
+</body>
+</html>
